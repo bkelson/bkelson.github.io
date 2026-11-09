@@ -170,6 +170,9 @@ section.band{position:relative;overflow:hidden}
 .card-coffee{display:flex;flex-direction:column;gap:16px;padding:clamp(32px,4vw,48px);border-radius:24px;background:var(--button);color:#FFF6F0}
 .card-coffee p{font-size:17px;line-height:1.55;opacity:.92}
 .card-coffee a{align-self:flex-start;margin-top:auto;padding:13px 24px;border-radius:999px;background:#FFF6F0;color:#8E3F22;font-size:16px;font-weight:600}
+.sponsor-soon{align-self:flex-start;margin-top:auto;display:inline-flex;align-items:baseline;flex-wrap:wrap;gap:14px;padding:13px 24px;border-radius:999px;border:1.5px dashed rgba(255,246,240,.7);color:#FFF6F0;font-size:16px;font-weight:600;cursor:default}
+.sponsor-soon s{text-decoration-thickness:2px;opacity:.75}
+.scribble{font-family:"Bradley Hand","Segoe Print","Comic Sans MS",cursive;font-size:21px;font-weight:400;color:#FFF6F0;transform:rotate(-4deg);display:inline-block;white-space:nowrap}
 .card-contact{display:flex;flex-direction:column;gap:16px;padding:clamp(32px,4vw,48px);border-radius:24px;background:var(--surface-card);border:1px solid var(--border)}
 .card-contact p{font-size:17px;line-height:1.55;color:var(--muted)}
 .card-contact a{align-self:flex-start;margin-top:auto;padding:13px 24px;border-radius:999px;border:1px solid var(--border);background:var(--surface-shell);color:var(--ink);font-size:16px;font-weight:600}
@@ -362,7 +365,7 @@ footer .legal{max-width:520px;line-height:1.5}
       <img src="assets/cap-logo-solid-light.svg" alt="" style="height:40px;width:auto">
       <h2 style="font-size:clamp(28px,3.4vw,40px);line-height:1.1;font-weight:700;letter-spacing:-.025em">Appreciate my work? Buy me coffee.</h2>
       <p>Cap is free. If you'd like to chip in, any amount helps cover the time that goes into it.</p>
-      <a href="https://github.com/sponsors/your-handle">Sponsor on GitHub</a>
+      <span class="sponsor-soon" aria-label="Sponsor on GitHub, coming later"><s>Sponsor on GitHub</s><span class="scribble">coming later</span></span>
     </div>
     <div class="card-contact">
       <span class="eyebrow" style="color:var(--muted)">Contact</span>
