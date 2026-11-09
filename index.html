@@ -196,6 +196,15 @@ footer .legal{max-width:520px;line-height:1.5}
 .dialog-img img{width:100%;height:auto}
 .dialog-placeholder{display:flex;align-items:center;justify-content:center;aspect-ratio:16/10;font:500 14px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;color:#1B5E36;text-align:center;padding:20px}
 
+/* install gate (before download) */
+#gate{position:fixed;inset:0;z-index:300;display:flex;align-items:center;justify-content:center;padding:clamp(16px,4vw,40px);background:rgba(11,38,22,.55);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.gate-card{width:100%;max-width:520px;padding:clamp(24px,4vw,36px);border-radius:24px;background:var(--surface-shell);color:var(--ink);border:1px solid var(--border);box-shadow:var(--shadow-window)}
+.gate-card .eyebrow{color:var(--accent)}
+.gate-card h3{margin-top:10px;font-size:clamp(24px,3vw,30px);font-weight:700;letter-spacing:-.02em;line-height:1.15}
+.gate-card p{margin-top:14px;font-size:16px;line-height:1.55;color:var(--muted);text-wrap:pretty}
+.gate-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:24px}
+.gate-actions .btn{padding:13px 22px;font-size:15px}
+
 @media (prefers-reduced-motion: reduce){
   .hero-ring,.hero-inner,.hero-shot,.wallpaper,.fan>div,.rm-parallax{transform:none!important}
   .cursor,.dock{transition:none}
@@ -217,7 +226,7 @@ footer .legal{max-width:520px;line-height:1.5}
     <a href="#widget">Widget</a>
     <a href="#roadmap">Roadmap</a>
     <a href="#community">Community</a>
-    <a class="pill" href="https://github.com/bkelson/cap/releases/latest">Download</a>
+    <a class="pill" href="https://github.com/bkelson/cap/releases/latest" data-download>Download</a>
   </div>
 </nav>
 
@@ -232,7 +241,7 @@ footer .legal{max-width:520px;line-height:1.5}
     <h1>Your Claude limits, right in the menu bar.</h1>
     <p>Cap shows how much of your Session and weekly All Models limits you've used, how long until they reset, and nothing you didn't ask for.</p>
     <div class="hero-actions">
-      <a class="btn btn-primary" href="https://github.com/bkelson/cap/releases/latest">Download for Mac</a>
+      <a class="btn btn-primary" href="https://github.com/bkelson/cap/releases/latest" data-download>Download for Mac</a>
       <a class="btn btn-ghost" href="https://github.com/bkelson/cap">View on GitHub</a>
     </div>
   </div>
@@ -387,6 +396,18 @@ footer .legal{max-width:520px;line-height:1.5}
   </div>
 </footer>
 
+<div id="gate" role="dialog" aria-modal="true" aria-labelledby="gate-title" hidden>
+  <div class="gate-card">
+    <span class="eyebrow">Before you install</span>
+    <h3 id="gate-title">Cap needs a few extra steps</h3>
+    <p>Cap isn't signed or notarized by Apple yet, so macOS will stop it the first time you open it. Installing it requires additional steps: you'll allow it in Privacy &amp; Security and confirm with Touch ID or your password. You'll need to do this once per install and again after each update.</p>
+    <div class="gate-actions">
+      <a class="btn btn-primary" id="gate-go" href="https://github.com/bkelson/cap/blob/main/INSTALL.md">Download and take me to instructions</a>
+      <button class="btn btn-ghost" id="gate-later" type="button">I'll try again once Cap is certified</button>
+    </div>
+  </div>
+</div>
+
 <div id="concept" role="dialog" aria-modal="true" aria-labelledby="concept-title">
   <div class="dialog" id="dialog">
     <div class="dialog-head">
@@ -476,6 +497,30 @@ footer .legal{max-width:520px;line-height:1.5}
   modal.addEventListener('click', function (e) { if (e.target === modal) closeConcept(); });
   $('#concept-close').addEventListener('click', closeConcept);
   addEventListener('keydown', function (e) { if (e.key === 'Escape' && modal.classList.contains('open')) closeConcept(); });
+
+  /* ---------- install gate: shown before any download ---------- */
+  var DMG_URL = 'https://github.com/bkelson/cap/releases/latest/download/Cap-1.0.0.dmg';
+  var INSTALL_URL = 'https://github.com/bkelson/cap/blob/main/INSTALL.md';
+  var gate = $('#gate'), gateGo = $('#gate-go'), gateLater = $('#gate-later'), lastGate = null;
+  function openGate(e) {
+    e.preventDefault();
+    lastGate = document.activeElement;
+    gate.hidden = false;
+    gateGo.focus();
+  }
+  function closeGate() { gate.hidden = true; if (lastGate && lastGate.focus) lastGate.focus(); }
+  $$('[data-download]').forEach(function (a) { a.addEventListener('click', openGate); });
+  gateLater.addEventListener('click', closeGate);
+  gate.addEventListener('click', function (e) { if (e.target === gate) closeGate(); });
+  addEventListener('keydown', function (e) { if (e.key === 'Escape' && !gate.hidden) closeGate(); });
+  gateGo.addEventListener('click', function (e) {
+    e.preventDefault();
+    // Start the download without leaving the page, then take the visitor to the instructions.
+    var dl = document.createElement('a');
+    dl.href = DMG_URL; dl.setAttribute('download', '');
+    document.body.appendChild(dl); dl.click(); dl.remove();
+    setTimeout(function () { window.location.href = INSTALL_URL; }, 1200);
+  });
 
   /* ---------- pinned demo ---------- */
   var STEPS = [
