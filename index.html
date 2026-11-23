@@ -161,7 +161,8 @@ section.band{position:relative;overflow:hidden}
 .community .lede{color:var(--muted)}
 .repo-card{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:20px;padding:28px 32px;border-radius:20px;background:var(--surface-card);border:1px solid var(--border);color:var(--ink)}
 .repo-card img{width:52px;height:52px}
-.repo-card .mono{font:500 17px/1.3 ui-monospace,SFMono-Regular,Menlo,monospace;overflow-wrap:anywhere}
+.repo-card .mono{font:500 17px/1.3 ui-monospace,SFMono-Regular,Menlo,monospace;white-space:nowrap}
+.repo-card .mono b{font-weight:500;color:var(--muted)}
 .way{display:flex;flex-direction:column;gap:10px;padding:28px;border-radius:18px;border:1px solid var(--border);background:var(--surface-shell);color:var(--ink)}
 .way:hover{border-color:#D9744C;text-decoration:none}
 .way p{font-size:15px;line-height:1.55;color:var(--muted);text-wrap:pretty}
@@ -169,7 +170,8 @@ section.band{position:relative;overflow:hidden}
 .support{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:20px;max-width:1120px;margin:0 auto}
 .card-coffee{display:flex;flex-direction:column;gap:16px;padding:clamp(32px,4vw,48px);border-radius:24px;background:var(--button);color:#FFF6F0}
 .card-coffee p{font-size:17px;line-height:1.55;opacity:.92}
-.card-coffee a{align-self:flex-start;margin-top:auto;padding:13px 24px;border-radius:999px;background:#FFF6F0;color:#8E3F22;font-size:16px;font-weight:600}
+.card-coffee>a{align-self:flex-start;margin-top:auto;padding:13px 24px;border-radius:999px;background:#FFF6F0;color:#8E3F22;font-size:16px;font-weight:600}
+.donate{align-self:flex-start;margin-top:auto}
 .sponsor-soon{align-self:flex-start;margin-top:auto;display:inline-flex;align-items:baseline;flex-wrap:wrap;gap:14px;padding:13px 24px;border-radius:999px;border:1.5px dashed rgba(255,246,240,.7);color:#FFF6F0;font-size:16px;font-weight:600;cursor:default}
 .sponsor-soon s{text-decoration-thickness:2px;opacity:.75}
 .scribble{font-family:"Bradley Hand","Segoe Print","Comic Sans MS",cursive;font-size:21px;font-weight:400;color:#FFF6F0;transform:rotate(-4deg);display:inline-block;white-space:nowrap}
@@ -206,6 +208,15 @@ footer .legal{max-width:520px;line-height:1.5}
 .gate-actions .btn-ghost{background:transparent}
 .gate-card .gate-note{margin-top:12px;font-size:12.5px;line-height:1.4;color:var(--muted)}
 
+/* scroll cues */
+.cue{position:fixed;left:50%;bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:40;transform:translateX(-50%);display:flex;align-items:center;gap:8px;padding:9px 16px 9px 14px;border-radius:999px;border:1px solid var(--border);background:color-mix(in oklab,var(--surface-shell) 82%,transparent);backdrop-filter:blur(14px) saturate(1.3);-webkit-backdrop-filter:blur(14px) saturate(1.3);box-shadow:0 8px 24px rgba(30,26,24,.16);color:var(--muted);font:600 13px/1 var(--font);letter-spacing:.02em;cursor:pointer;transition:opacity .35s ease,visibility .35s ease}
+.cue:hover{color:var(--ink)}
+.cue svg,.hint-arrow{color:var(--accent);animation:cue-bob 2.2s ease-in-out infinite}
+.cue.off{opacity:0;visibility:hidden;pointer-events:none}
+@keyframes cue-bob{0%,100%{transform:translateY(-2px)}50%{transform:translateY(3px)}}
+#demo-hint{display:flex;flex-direction:column;align-items:center;gap:10px;padding:8px 0 20px;background:var(--surface-card);color:var(--muted);transition:opacity .3s ease}
+@media (max-width:480px){.cue span{display:none}.cue{padding:11px}}
+@media (prefers-reduced-motion: reduce){.cue svg,.hint-arrow{animation:none}}
 @media (prefers-reduced-motion: reduce){
   .hero-ring,.hero-inner,.hero-shot,.wallpaper,.fan>div,.rm-parallax{transform:none!important}
   .cursor,.dock{transition:none}
@@ -214,6 +225,60 @@ footer .legal{max-width:520px;line-height:1.5}
   .demo-row{flex-direction:column;justify-content:flex-start;gap:20px}
   .captions{flex:0 0 auto}
 }
+
+/* ---- adaptive layouts for tablets and phones ---- */
+.intro-solo{display:none}
+picture{display:block}
+@media (max-width:999px){
+  #sticky{top:55px}
+  #demo-hint{display:none}
+  .demo-row{gap:16px;padding-top:20px;padding-bottom:24px}
+  .captions{max-width:none}
+  /* every step shares one grid cell, so the caption box never changes height */
+  #steps{display:grid!important;gap:0!important}
+  .step{grid-area:1/1}
+  .stage-box{max-width:none;overflow:visible}
+  #stage-size{border:1px solid var(--border);border-radius:18px;box-shadow:var(--shadow-window);background:var(--surface-shell)}
+  .stage{border:none;border-radius:0;box-shadow:none}
+  .stage.phone .term{left:22px;width:296px}
+}
+@media (max-width:759px){
+  .intro-solo{display:flex;padding-top:28px;padding-bottom:18px}
+  .intro-solo img{width:clamp(220px,62vw,300px)}
+  #sticky .intro{display:none}
+  .hero-shot{width:100vw;max-width:none;margin-top:40px}
+  .shot{border-radius:0;border-left:none;border-right:none}
+  .repo-card{padding:20px;gap:16px}
+  .repo-card img{width:44px;height:44px}
+  .repo-card .mono{font-size:min(17px,calc((100vw - 140px)/13.6))}
+  .item{white-space:normal;border-radius:18px}
+  /* widgets: a gentle floating stack, shown large */
+  .fan{flex:1 1 100%;min-height:0;display:flex;flex-direction:column;align-items:center;gap:34px;padding:6px 0 0}
+  .fan>div{position:relative;left:auto;top:auto;transform:none!important;translate:0 36px;opacity:0;transition:translate .9s cubic-bezier(.2,.8,.2,1),opacity .9s ease}
+  .fan>div.in{translate:0 0;opacity:1}
+  .fan>div:nth-child(1){zoom:calc(var(--u,1)*1.3);align-self:flex-start}
+  .fan>div:nth-child(2){zoom:var(--u,1)}
+  .fan>div:nth-child(3){zoom:calc(var(--u,1)*1.22);align-self:flex-end}
+  .fan .widget{animation:floaty 6.5s ease-in-out infinite}
+  .fan>div:nth-child(2) .widget{animation-duration:7.5s;animation-delay:-2s}
+  .fan>div:nth-child(3) .widget{animation-duration:5.8s;animation-delay:-4s}
+  @keyframes floaty{0%,100%{transform:translate3d(0,0,0) rotate(-.6deg)}50%{transform:translate3d(0,-9px,0) rotate(.7deg)}}
+  /* concept preview becomes a full-screen viewer */
+  #concept{padding:0;align-items:stretch}
+  .dialog{max-width:none;height:100%;border-radius:0;display:flex;flex-direction:column;padding-bottom:0;overflow:hidden}
+  .dialog-head{padding:max(18px,env(safe-area-inset-top)) 18px 12px}
+  .dialog-head p{font-size:15px}
+  #concept-media{flex:1;min-height:0;display:flex;flex-direction:column}
+  .zbar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:0 18px 10px;font-size:13px;color:#1B5E36}
+  .zseg{display:inline-flex;border-radius:999px;background:rgba(11,38,22,.1);padding:3px}
+  .zseg button{border:0;background:transparent;color:#0B2616;font:600 13px/1 var(--font);padding:8px 14px;border-radius:999px}
+  .zseg button[aria-pressed="true"]{background:#0B2616;color:#E9FBF0}
+  .dialog-img.zoomer{flex:1;min-height:0;margin:0;border-radius:0;border-left:0;border-right:0;border-bottom:0;overflow:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
+  .zoomer img{width:210%;max-width:none;height:auto}
+  .zoomer.fit img{width:100%}
+  .zoomer.fit{display:flex;align-items:center}
+}
+@media (prefers-reduced-motion: reduce){.fan .widget{animation:none}.fan>div{translate:none;opacity:1;transition:none}}
 </style>
 </head>
 <body>
@@ -248,14 +313,15 @@ footer .legal{max-width:520px;line-height:1.5}
   </div>
   <div class="hero-shot" data-speed="-0.08">
     <div class="shot">
-      <img class="theme-light" src="assets/hero-light.png" width="1760" height="720" alt="Cap's popover open under the menu bar, showing Session at 35% and All Models at 20%">
-      <img class="theme-dark" src="assets/hero-dark.png" width="1760" height="720" alt="Cap's popover open under the menu bar, showing Session at 35% and All Models at 20%">
+      <picture class="theme-light"><source media="(max-width:759px)" srcset="assets/hero-mobile-light.png" width="662" height="622"><img src="assets/hero-light.png" width="1760" height="720" alt="Cap's popover open under the menu bar, showing Session at 35% and All Models at 20%"></picture>
+      <picture class="theme-dark"><source media="(max-width:759px)" srcset="assets/hero-mobile-dark.png" width="662" height="622"><img src="assets/hero-dark.png" width="1760" height="720" alt="Cap's popover open under the menu bar, showing Session at 35% and All Models at 20%"></picture>
     </div>
   </div>
 </header>
 
 <section id="how" aria-label="How it works">
   <div class="spacer"></div>
+  <div class="intro intro-solo"><span>Introducing</span><img src="assets/cap-logo-tagline-dark.svg" alt="" aria-hidden="true"></div>
   <div id="demo">
     <div id="sticky">
       <div id="how-inner">
@@ -277,6 +343,7 @@ footer .legal{max-width:520px;line-height:1.5}
           </div>
         </div>
       </div>
+      <div id="demo-hint" aria-hidden="true"><span class="eyebrow">Keep scrolling</span><svg class="hint-arrow" width="22" height="30" viewBox="0 0 22 30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 3v22M4 18l7 7 7-7"/></svg></div>
       </div>
       <div class="facts-wrap" style="padding:clamp(88px,11vw,150px) clamp(20px,4vw,48px);display:flex;flex-direction:column;align-items:center;gap:56px;background:var(--surface-shell)" id="next">
         <div data-speed="0.06" style="max-width:820px;text-align:center;display:flex;flex-direction:column;gap:16px">
@@ -302,7 +369,7 @@ footer .legal{max-width:520px;line-height:1.5}
       <p>Click the pin in the popover and Cap stays on screen. Three layouts and seven styles, from warm and solid to clear glass that takes on your wallpaper.</p>
     </div>
     <div class="fan" id="fan">
-      <div data-fan="-112" data-dist="60" data-x="-230" data-y="-170" style="z-index:2"><div class="widget small" style="--track:rgba(30,26,24,.1);--fill:#B5532F"><div style="display:flex;justify-content:space-between"><span class="lbl">Session</span></div><div style="display:flex;align-items:center;gap:12px"><span class="dial" style="width:56px;height:56px;--fill:conic-gradient(from 180deg,#B5532F 0 31%,transparent 31%);--track:rgba(30,26,24,.1)"></span><span class="fig" style="font-size:30px">31%</span></div><div class="lbl" style="letter-spacing:0;text-transform:none;font-size:11.5px">2h 17m left · All Models 5%</div></div></div>
+      <div data-fan="-112" data-dist="60" data-x="-230" data-y="-170" style="z-index:2"><div class="widget small" style="--track:var(--dial-track);--fill:#B5532F"><div style="display:flex;justify-content:space-between"><span class="lbl">Session</span></div><div style="display:flex;align-items:center;gap:12px"><span class="dial" style="width:56px;height:56px;--fill:conic-gradient(from 180deg,#B5532F 0 31%,transparent 31%);--track:var(--dial-track)"></span><span class="fig" style="font-size:30px">31%</span></div><div class="lbl" style="letter-spacing:0;text-transform:none;font-size:11.5px">2h 17m left · All Models 5%</div></div></div>
       <div data-fan="-28" data-dist="55" data-x="-110" data-y="-120" style="z-index:1"><div class="widget medium" style="background:#2A2321;color:#F4F1EE;border-color:rgba(255,255,255,.1)"><div style="display:grid;grid-template-columns:1fr 1fr;gap:14px"><div style="display:flex;gap:10px;align-items:center"><span class="dial" style="width:48px;height:48px;--fill:conic-gradient(from 180deg,#D9744C 0 74%,transparent 74%);--track:rgba(255,255,255,.12)"></span><div><div class="lbl">Session</div><div class="fig" style="font-size:26px">74%</div></div></div><div style="display:flex;gap:10px;align-items:center"><span class="dial" style="width:48px;height:48px;--fill:conic-gradient(from 180deg,#D9744C 0 41%,transparent 41%);--track:rgba(255,255,255,.12)"></span><div><div class="lbl">All Models</div><div class="fig" style="font-size:26px">41%</div></div></div></div><div class="lbl" style="letter-spacing:0;text-transform:none;font-size:11.5px">1h 05m left</div></div></div>
       <div data-fan="118" data-dist="60" data-x="-200" data-y="30" style="z-index:3"><div class="widget strip" style="background:#0E0C0BF0;color:#F4F1EE;border-color:rgba(255,255,255,.08)"><span class="dial" style="width:20px;height:20px;--fill:conic-gradient(from 180deg,#E89772 0 12%,transparent 12%);--track:rgba(255,255,255,.12)"></span><span class="lbl" style="color:#F4F1EE99">5h</span><span class="fig" style="font-size:15px">12%</span><span style="width:1px;height:18px;background:rgba(255,255,255,.12)"></span><span class="dial" style="width:20px;height:20px;--fill:conic-gradient(from 180deg,#E89772 0 33%,transparent 33%);--track:rgba(255,255,255,.12)"></span><span class="lbl" style="color:#F4F1EE99">Week</span><span class="fig" style="font-size:15px">33%</span></div></div>
     </div>
@@ -356,7 +423,7 @@ footer .legal{max-width:520px;line-height:1.5}
         <img src="assets/icon_128x128.png" alt="">
         <div style="display:flex;flex-direction:column;gap:4px;min-width:0">
           <span class="eyebrow" style="color:var(--muted)">Repository</span>
-          <span class="mono">github.com/bkelson/cap</span>
+          <span class="mono"><b>github.com/</b>bkelson/cap</span>
         </div>
       </div>
       <span style="flex:none;white-space:nowrap;padding:11px 20px;border-radius:999px;background:var(--button);color:var(--on-button);font-size:15px;font-weight:600">Star on GitHub</span>
@@ -375,7 +442,7 @@ footer .legal{max-width:520px;line-height:1.5}
       <img src="assets/cap-logo-solid-light.svg" alt="" style="height:40px;width:auto">
       <h2 style="font-size:clamp(28px,3.4vw,40px);line-height:1.1;font-weight:700;letter-spacing:-.025em">Appreciate my work? Buy me coffee.</h2>
       <p>Cap is free. If you'd like to chip in, any amount helps cover the time that goes into it.</p>
-      <span class="sponsor-soon" aria-label="Sponsor on GitHub, coming later"><s>Sponsor on GitHub</s><span class="scribble">coming later</span></span>
+      <div class="donate"><script src="https://liberapay.com/bkelson/widgets/button.js"></script><noscript><a href="https://liberapay.com/bkelson/donate"><img alt="Donate using Liberapay" src="https://liberapay.com/assets/widgets/donate.svg"></a></noscript></div>
     </div>
     <div class="card-contact">
       <span class="eyebrow" style="color:var(--muted)">Contact</span>
@@ -396,6 +463,8 @@ footer .legal{max-width:520px;line-height:1.5}
     <span class="legal">Cap is an independent project and is not made or endorsed by Anthropic. Claude and Claude Code are trademarks of Anthropic.</span>
   </div>
 </footer>
+
+<button type="button" id="scroll-cue" class="cue" aria-label="Scroll down"><span>Keep scrolling</span><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 5 7 9.5 11.5 5"/></svg></button>
 
 <div id="gate" role="dialog" aria-modal="true" aria-labelledby="gate-title" hidden>
   <div class="gate-card">
@@ -486,9 +555,26 @@ footer .legal{max-width:520px;line-height:1.5}
     $('#concept-meta').textContent = 'Concept · not built';
     $('#concept-title').textContent = name.replace(/ \(.*\)$/, '');
     $('#concept-desc').textContent = c.desc;
-    media.innerHTML = c.img
-      ? '<div class="dialog-img" style="margin-bottom:28px"><img src="' + c.img + '" alt="' + c.alt + '" loading="lazy"></div>'
-      : '<div class="dialog-img" style="margin-bottom:28px"><div class="dialog-placeholder">Design in progress. An image of this concept will appear here.</div></div>';
+    var phone = !!(window.matchMedia && matchMedia('(max-width:759px)').matches);
+    if (c.img && phone) {
+      /* Phones: a full-screen viewer that opens zoomed in; drag to look around, or switch to Fit. */
+      media.innerHTML = '<div class="zbar"><span>Drag to explore</span><span class="zseg" role="group" aria-label="Zoom"><button type="button" data-z="fit" aria-pressed="false">Fit</button><button type="button" data-z="zoom" aria-pressed="true">Zoom</button></span></div>' +
+        '<div class="dialog-img zoomer" id="zoomer"><img src="' + c.img + '" alt="' + c.alt + '"></div>';
+      var zoomer = $('#zoomer'), zimg = $('img', zoomer);
+      var centre = function () { zoomer.scrollLeft = 0; zoomer.scrollTop = 0; };
+      var setZ = function (mode) {
+        zoomer.classList.toggle('fit', mode === 'fit');
+        $$('.zseg button', media).forEach(function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-z') === mode ? 'true' : 'false'); });
+        if (mode === 'zoom') centre();
+      };
+      $$('.zseg button', media).forEach(function (b) { b.addEventListener('click', function () { setZ(b.getAttribute('data-z')); }); });
+      zimg.addEventListener('load', centre);
+      if (zimg.complete) centre();
+    } else {
+      media.innerHTML = c.img
+        ? '<div class="dialog-img" style="margin-bottom:28px"><img src="' + c.img + '" alt="' + c.alt + '" loading="lazy"></div>'
+        : '<div class="dialog-img" style="margin-bottom:28px"><div class="dialog-placeholder">Design in progress. An image of this concept will appear here.</div></div>';
+    }
     modal.classList.add('open');
     $('#concept-close').focus();
   }
@@ -547,10 +633,17 @@ footer .legal{max-width:520px;line-height:1.5}
   }).join('');
   var stepEls = $$('.step', stepsEl), fillEls = $$('.step-fill', stepsEl);
   var LINES = ['$ claude', '> refactor the parser and add tests', '', '  Reading src/parser.ts', '  Editing src/parser.ts', '  Writing tests/parser.test.ts', '  Running npm test'];
-  var PTS = [[260, 330, 0], [372, 16, 0.19], [372, 16, 0.3], [360, 230, 0.48], [360, 230, 0.68], [586, 56, 0.76], [440, 300, 0.9], [440, 300, 1]];
+  var PTS_WIDE = [[260, 330, 0], [372, 16, 0.19], [372, 16, 0.3], [360, 230, 0.48], [360, 230, 0.68], [586, 56, 0.76], [440, 300, 0.9], [440, 300, 1]];
+  var PTS_PHONE = [[120, 340, 0], [178, 16, 0.19], [178, 16, 0.3], [200, 230, 0.48], [200, 230, 0.68], [306, 56, 0.76], [190, 330, 0.9], [190, 330, 1]];
   var stage = $('#stage'), stageSize = $('#stage-size'), stageBox = $('#stage-box'), demo = $('#demo'), sticky = $('#sticky');
   var termEl = $('#term'), cursor = $('#cursor'), dockPop = $('#dock-pop'), dockWidget = $('#dock-widget'), row = $('#demo-row'), caps = $('#captions');
-  var S = { p: 0, narrow: false, scale: 1 };
+  var S = { p: 0, narrow: false, phone: false, scale: 1, top: 68, vh: 0 };
+  var how = $('#how'), facts = $('#next');
+  var probe = document.createElement('div');
+  probe.setAttribute('aria-hidden', 'true');
+  probe.style.cssText = 'position:fixed;left:0;top:0;width:0;height:100svh;visibility:hidden;pointer-events:none';
+  document.body.appendChild(probe);
+  function smooth(t) { t = clamp(t); return t * t * (3 - 2 * t); }
 
   function dialHTML(pct, size, fill, track) {
     return '<span class="dial" style="width:' + size + 'px;height:' + size + 'px;--fill:conic-gradient(from 180deg,' + fill + ' 0 ' + pct + '%,transparent ' + pct + '%);--track:' + track + '"></span>';
@@ -568,17 +661,19 @@ footer .legal{max-width:520px;line-height:1.5}
     var s = Math.round(lerp(35, 91, grow)), a = Math.round(lerp(20, 25, grow)), mins = Math.round(lerp(199, 62, grow));
     var left = Math.floor(mins / 60) + 'h ' + String(mins % 60).padStart(2, '0') + 'm';
     var popOpen = p >= 0.2 && p < 0.77, wOn = p >= 0.77;
+    var PTS = S.phone ? PTS_PHONE : PTS_WIDE;
     var cx = PTS[0][0], cy = PTS[0][1];
     for (var i = 0; i < PTS.length - 1; i++) {
       var A = PTS[i], B = PTS[i + 1];
       if (p >= A[2] && p <= B[2]) { var t = (p - A[2]) / ((B[2] - A[2]) || 1), e = t * t * (3 - 2 * t); cx = lerp(A[0], B[0], e); cy = lerp(A[1], B[1], e); }
     }
-    if (p > 1) { cx = 440; cy = 300; }
+    if (p > 1) { cx = PTS[PTS.length - 1][0]; cy = PTS[PTS.length - 1][1]; }
     var clicking = (p > 0.185 && p < 0.21) || (p > 0.75 && p < 0.775);
     var shown = Math.max(2, Math.min(LINES.length, 2 + Math.floor(grow * 6)));
     stepEls.forEach(function (el, i) {
-      el.style.display = S.narrow && i !== step ? 'none' : 'flex';
-      el.style.opacity = i === step ? 1 : 0.38;
+      el.style.display = 'flex';
+      el.style.opacity = i === step ? 1 : (S.narrow ? 0 : 0.38);
+      el.style.visibility = S.narrow && i !== step ? 'hidden' : 'visible';
       fillEls[i].style.height = (i < step ? 100 : i === step ? clamp(p * 4 - i) * 100 : 0) + '%';
     });
     $('#menu-cap').innerHTML = '<div style="display:flex;align-items:center;height:24px;padding:0 6px;border-radius:6px;background:' + (popOpen ? 'rgba(30,26,24,.1)' : 'transparent') + '"><div style="position:relative;display:flex;align-items:center;gap:8px;height:18px;padding:0 6px;border-radius:9px;color:var(--ink)"><span class="dial" style="width:14px;height:14px;--fill:conic-gradient(from 180deg,var(--ink) 0 ' + s + '%,transparent ' + s + '%);--track:rgba(30,26,24,.3)"></span><span style="font-size:13px;font-weight:500;font-variant-numeric:tabular-nums">' + s + '%</span></div></div>';
@@ -590,19 +685,49 @@ footer .legal{max-width:520px;line-height:1.5}
     dockWidget.style.transform = wOn ? 'translateY(0)' : 'translateY(12px)';
     termEl.textContent = LINES.slice(0, shown).join('\n');
     cursor.style.transform = 'translate(' + cx.toFixed(1) + 'px,' + cy.toFixed(1) + 'px) scale(' + (clicking ? 0.85 : 1) + ')';
+    var hint = $('#demo-hint');
+    if (hint) hint.style.opacity = (1 - clamp((p - 0.85) / 0.1)).toFixed(3);
   }
   function applyLayout() {
     var narrow = innerWidth < 1000;
     S.narrow = narrow;
+    /* On narrow screens the "built on" facts sit after the pinned demo, not inside it. */
+    if (narrow && facts.parentNode !== how) how.appendChild(facts);
+    if (!narrow && facts.parentNode === how) sticky.appendChild(facts);
         row.style.flexDirection = narrow ? 'column' : 'row';
     caps.style.flex = narrow ? '0 0 auto' : '0 1 420px';
   }
   function measure() {
     applyLayout();
+    sticky.style.top = S.narrow ? $('nav.top').offsetHeight + 'px' : '';
+    S.top = parseFloat(getComputedStyle(sticky).top) || 68;
+    S.vh = (probe.offsetHeight || innerHeight);
+    if (S.narrow) {
+      /* Phones get a stage drawn for a narrow screen (360 wide); tablets keep the full 640 stage. Both are scaled to the column. */
+      var phone = innerWidth < 760;
+      S.phone = phone;
+      stage.classList.toggle('phone', phone);
+      var SW = phone ? 360 : 640, SH = phone ? 400 : 440;
+      stage.style.width = SW + 'px'; stage.style.height = SH + 'px';
+      var other = sticky.offsetHeight - stageSize.offsetHeight;
+      var availH = S.vh - S.top - 8 - other;
+      var W = Math.min(700, innerWidth - 40);
+      var sc = Math.max(0.5, Math.min(1.1, W / SW, availH / SH));
+      S.scale = sc;
+      stage.style.transform = 'scale(' + sc.toFixed(3) + ')';
+      stageSize.style.width = Math.round(SW * sc) + 'px';
+      stageSize.style.height = Math.round(SH * sc) + 'px';
+      demo.style.height = reduced ? 'auto' : (Math.round(sticky.offsetHeight + 3 * S.vh)) + 'px';
+      renderDemo();
+      return;
+    }
+    stage.style.width = ''; stage.style.height = '';
+    stage.classList.remove('phone');
+    stageSize.style.height = '';
     var w = S.narrow ? Math.min(700, innerWidth - 40) : Math.min(700, innerWidth - 96 - 420 - 72);
     var howH = $('#how-inner').offsetHeight;
     var other = howH - 440 * S.scale;
-    var availH = innerHeight - 68 - 8 - other;
+    var availH = innerHeight - S.top - 8 - other;
     var scale = Math.max(0.4, Math.min(1, w / 640, availH / 440));
     S.scale = scale;
     stage.style.transform = 'scale(' + scale.toFixed(3) + ')';
@@ -654,11 +779,25 @@ footer .legal{max-width:520px;line-height:1.5}
     });
     var dr = demo.getBoundingClientRect();
     var sh = sticky.offsetHeight || innerHeight;
-    var p = clamp((68 - dr.top) / Math.max(1, dr.height - sh));
+    var p = clamp((S.top - dr.top) / Math.max(1, dr.height - sh));
     if (Math.abs(p - S.p) > 0.002) { S.p = p; renderDemo(); }
   }
+  /* phone widget stack: size to the column, and ease each widget in as it arrives */
+  var fanEl = $('#fan'), fanKids = $$('#fan>div');
+  function sizeFan() { fanEl.style.setProperty('--u', Math.max(0.6, Math.min(1.2, fanEl.clientWidth / 340)).toFixed(3)); }
+  sizeFan(); addEventListener('resize', sizeFan);
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }); }, { threshold: 0.25 });
+    fanKids.forEach(function (k, i) { k.style.transitionDelay = (i * 0.12) + 's'; io.observe(k); });
+  } else { fanKids.forEach(function (k) { k.classList.add('in'); }); }
+
+  /* ---------- scroll cue ---------- */
+  var cue = $('#scroll-cue');
+  cue.addEventListener('click', function () { glideTo(scrollY + Math.round(innerHeight * 0.85)); });
+  function cueTick() { cue.classList.toggle('off', scrollY + innerHeight >= document.documentElement.scrollHeight - 160); }
+
   var raf = 0;
-  function onScroll() { if (!raf) raf = requestAnimationFrame(function () { raf = 0; tick(); }); }
+  function onScroll() { if (!raf) raf = requestAnimationFrame(function () { raf = 0; tick(); cueTick(); }); }
   function onResize() { measure(); onScroll(); }
   addEventListener('scroll', onScroll, { passive: true });
   addEventListener('resize', onResize);
