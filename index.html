@@ -72,8 +72,8 @@ header.hero{position:relative;overflow:clip;padding-top:clamp(72px,11vw,140px);d
 
 /* pinned demo */
 #how{position:relative;background:var(--surface-shell);border-top:1px solid var(--hairline)}
-.spacer{height:clamp(32px,4vw,64px)}
-.intro{display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;padding:0 20px clamp(12px,1.4vw,16px);background:var(--surface-shell);border-bottom:1px solid var(--hairline)}
+.spacer{display:none}
+.intro{display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;padding:clamp(24px,3vw,40px) 20px;background:var(--surface-shell);border-bottom:1px solid var(--hairline)}
 .intro span{font-size:16px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--button)}
 .intro img{width:clamp(278px,27.8vw,405px);height:auto}
 #demo{position:relative;height:400vh}
@@ -214,6 +214,7 @@ footer .legal{max-width:520px;line-height:1.5}
 .cue svg,.hint-arrow{color:var(--accent);animation:cue-bob 2.2s ease-in-out infinite}
 .cue.off{opacity:0;visibility:hidden;pointer-events:none}
 @keyframes cue-bob{0%,100%{transform:translateY(-2px)}50%{transform:translateY(3px)}}
+#toast{position:fixed;left:50%;bottom:calc(76px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:60;width:min(92vw,360px);padding:12px 16px;border-radius:14px;background:var(--surface-card);color:var(--ink);border:1px solid var(--border);box-shadow:var(--shadow-window);font-size:14px;line-height:1.4;text-align:center}
 #demo-hint{display:flex;flex-direction:column;align-items:center;gap:10px;padding:8px 0 20px;background:var(--surface-card);color:var(--muted);transition:opacity .3s ease}
 @media (max-width:480px){.cue span{display:none}.cue{padding:11px}}
 @media (prefers-reduced-motion: reduce){.cue svg,.hint-arrow{animation:none}}
@@ -243,10 +244,16 @@ picture{display:block}
   .stage.phone .term{left:22px;width:296px}
 }
 @media (max-width:759px){
-  .intro-solo{display:flex;padding-top:28px;padding-bottom:18px}
+  .intro-solo{display:flex;padding-top:32px;padding-bottom:32px}
   .intro-solo img{width:clamp(220px,62vw,300px)}
   #sticky .intro{display:none}
-  .hero-shot{width:100vw;max-width:none;margin-top:40px}
+  header.hero{padding-top:20px}
+  .hero-inner{gap:16px;justify-content:center;min-height:calc(100svh - 55px - 20px - 100px)}
+  .hero-inner>img{width:clamp(48px,8svh,64px);height:clamp(48px,8svh,64px)}
+  .hero-inner h1{font-size:min(10.4vw,5.4svh,46px)}
+  .hero-inner p{font-size:clamp(14.5px,2.1svh,16px);line-height:1.45}
+  .hero-actions{flex-direction:column;align-items:center;gap:10px;margin-top:2px}
+  .hero-shot{width:100vw;max-width:none;margin-top:124px;transform:none!important}
   .shot{border-radius:0;border-left:none;border-right:none}
   .repo-card{padding:20px;gap:16px}
   .repo-card img{width:44px;height:44px}
@@ -313,8 +320,8 @@ picture{display:block}
   </div>
   <div class="hero-shot" data-speed="-0.08">
     <div class="shot">
-      <picture class="theme-light"><source media="(max-width:759px)" srcset="assets/hero-mobile-light.png" width="662" height="622"><img src="assets/hero-light.png" width="1760" height="720" alt="Cap's popover open under the menu bar, showing Session at 35% and All Models at 20%"></picture>
-      <picture class="theme-dark"><source media="(max-width:759px)" srcset="assets/hero-mobile-dark.png" width="662" height="622"><img src="assets/hero-dark.png" width="1760" height="720" alt="Cap's popover open under the menu bar, showing Session at 35% and All Models at 20%"></picture>
+      <picture class="theme-light"><source media="(max-width:759px)" srcset="assets/hero-mobile-light.png" width="792" height="622"><img src="assets/hero-light.png" width="1760" height="720" alt="Cap's popover open under the menu bar, showing Session at 35% and All Models at 20%"></picture>
+      <picture class="theme-dark"><source media="(max-width:759px)" srcset="assets/hero-mobile-dark.png" width="792" height="622"><img src="assets/hero-dark.png" width="1760" height="720" alt="Cap's popover open under the menu bar, showing Session at 35% and All Models at 20%"></picture>
     </div>
   </div>
 </header>
@@ -371,7 +378,7 @@ picture{display:block}
     <div class="fan" id="fan">
       <div data-fan="-112" data-dist="60" data-x="-230" data-y="-170" style="z-index:2"><div class="widget small" style="--track:var(--dial-track);--fill:#B5532F"><div style="display:flex;justify-content:space-between"><span class="lbl">Session</span></div><div style="display:flex;align-items:center;gap:12px"><span class="dial" style="width:56px;height:56px;--fill:conic-gradient(from 180deg,#B5532F 0 31%,transparent 31%);--track:var(--dial-track)"></span><span class="fig" style="font-size:30px">31%</span></div><div class="lbl" style="letter-spacing:0;text-transform:none;font-size:11.5px">2h 17m left · All Models 5%</div></div></div>
       <div data-fan="-28" data-dist="55" data-x="-110" data-y="-120" style="z-index:1"><div class="widget medium" style="background:#2A2321;color:#F4F1EE;border-color:rgba(255,255,255,.1)"><div style="display:grid;grid-template-columns:1fr 1fr;gap:14px"><div style="display:flex;gap:10px;align-items:center"><span class="dial" style="width:48px;height:48px;--fill:conic-gradient(from 180deg,#D9744C 0 74%,transparent 74%);--track:rgba(255,255,255,.12)"></span><div><div class="lbl">Session</div><div class="fig" style="font-size:26px">74%</div></div></div><div style="display:flex;gap:10px;align-items:center"><span class="dial" style="width:48px;height:48px;--fill:conic-gradient(from 180deg,#D9744C 0 41%,transparent 41%);--track:rgba(255,255,255,.12)"></span><div><div class="lbl">All Models</div><div class="fig" style="font-size:26px">41%</div></div></div></div><div class="lbl" style="letter-spacing:0;text-transform:none;font-size:11.5px">1h 05m left</div></div></div>
-      <div data-fan="118" data-dist="60" data-x="-200" data-y="30" style="z-index:3"><div class="widget strip" style="background:#0E0C0BF0;color:#F4F1EE;border-color:rgba(255,255,255,.08)"><span class="dial" style="width:20px;height:20px;--fill:conic-gradient(from 180deg,#E89772 0 12%,transparent 12%);--track:rgba(255,255,255,.12)"></span><span class="lbl" style="color:#F4F1EE99">5h</span><span class="fig" style="font-size:15px">12%</span><span style="width:1px;height:18px;background:rgba(255,255,255,.12)"></span><span class="dial" style="width:20px;height:20px;--fill:conic-gradient(from 180deg,#E89772 0 33%,transparent 33%);--track:rgba(255,255,255,.12)"></span><span class="lbl" style="color:#F4F1EE99">Week</span><span class="fig" style="font-size:15px">33%</span></div></div>
+      <div data-fan="118" data-dist="60" data-x="-200" data-y="30" style="z-index:3"><div class="widget strip" style="background:#2A2321;color:#F4F1EE;border-color:rgba(255,255,255,.1)"><span class="dial" style="width:20px;height:20px;--fill:conic-gradient(from 180deg,#E89772 0 12%,transparent 12%);--track:rgba(255,255,255,.12)"></span><span class="lbl" style="color:#F4F1EE99">5h</span><span class="fig" style="font-size:15px">12%</span><span style="width:1px;height:18px;background:rgba(255,255,255,.12)"></span><span class="dial" style="width:20px;height:20px;--fill:conic-gradient(from 180deg,#E89772 0 33%,transparent 33%);--track:rgba(255,255,255,.12)"></span><span class="lbl" style="color:#F4F1EE99">Week</span><span class="fig" style="font-size:15px">33%</span></div></div>
     </div>
   </div>
 </section>
@@ -464,6 +471,7 @@ picture{display:block}
   </div>
 </footer>
 
+<div id="toast" role="status" aria-live="polite" hidden></div>
 <button type="button" id="scroll-cue" class="cue" aria-label="Scroll down"><span>Keep scrolling</span><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 5 7 9.5 11.5 5"/></svg></button>
 
 <div id="gate" role="dialog" aria-modal="true" aria-labelledby="gate-title" hidden>
@@ -607,7 +615,29 @@ picture{display:block}
     gateGo.focus();
   }
   function closeGate() { gate.hidden = true; if (lastGate && lastGate.focus) lastGate.focus(); }
-  $$('[data-download]').forEach(function (a) { a.addEventListener('click', openGate); });
+  /* On phones and tablets Cap cannot be installed, so Download becomes "send the link to my Mac" (the system share sheet). */
+  var UA = navigator.userAgent || '';
+  var MOBILE = /iPhone|iPad|iPod|Android/i.test(UA) || (/Macintosh/.test(UA) && navigator.maxTouchPoints > 1);
+  var SITE_URL = 'https://bkelson.github.io/';
+  var toastEl = $('#toast'), toastTimer = 0;
+  function toast(msg) {
+    toastEl.textContent = msg; toastEl.hidden = false;
+    clearTimeout(toastTimer); toastTimer = setTimeout(function () { toastEl.hidden = true; }, 4500);
+  }
+  function copyLink() {
+    var done = function () { toast('Link copied. Open it on your Mac to download Cap.'); };
+    var fail = function () { toast('Open bkelson.github.io on your Mac to download Cap.'); };
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(SITE_URL).then(done, fail); else fail();
+  }
+  function shareLink() {
+    var data = { title: 'Cap for Mac', text: 'Cap shows your Claude limits in the Mac menu bar. Open this link on your Mac to download it.', url: SITE_URL };
+    if (navigator.share) navigator.share(data).catch(function (err) { if (!err || err.name !== 'AbortError') copyLink(); });
+    else copyLink();
+  }
+  $$('[data-download]').forEach(function (a) {
+    if (MOBILE) a.textContent = a.classList.contains('pill') ? 'Send to Mac' : 'Send the link to my Mac';
+    a.addEventListener('click', function (e) { if (MOBILE) { e.preventDefault(); shareLink(); } else openGate(e); });
+  });
   gateLater.addEventListener('click', closeGate);
   gate.addEventListener('click', function (e) { if (e.target === gate) closeGate(); });
   addEventListener('keydown', function (e) { if (e.key === 'Escape' && !gate.hidden) closeGate(); });
