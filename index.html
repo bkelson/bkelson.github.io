@@ -133,6 +133,7 @@ section.band{position:relative;overflow:hidden}
 .pillar{display:flex;flex-direction:column;gap:18px;padding:34px 32px 38px;border-radius:24px;background:#0E3320;color:#E9FBF0;box-shadow:0 24px 50px rgba(11,38,22,.22)}
 .pillar p{font-size:19px;line-height:1.45;font-weight:500}
 .pillar .eyebrow{color:#7FE6AC}
+.pi{width:52px;height:52px;border-radius:16px;background:#46D486;color:#0B2616;display:flex;align-items:center;justify-content:center}
 .pillars{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
 .phase{display:grid;grid-template-columns:28px minmax(0,1fr);gap:clamp(16px,3vw,36px)}
 .rail{position:relative;display:flex;justify-content:center}
@@ -171,7 +172,14 @@ section.band{position:relative;overflow:hidden}
 .card-coffee{display:flex;flex-direction:column;gap:16px;padding:clamp(32px,4vw,48px);border-radius:24px;background:var(--button);color:#FFF6F0}
 .card-coffee p{font-size:17px;line-height:1.55;opacity:.92}
 .card-coffee>a{align-self:flex-start;margin-top:auto;padding:13px 24px;border-radius:999px;background:#FFF6F0;color:#8E3F22;font-size:16px;font-weight:600}
-.donate{align-self:flex-start;margin-top:auto}
+.donate{position:relative;align-self:flex-start;margin-top:auto;display:inline-flex;align-items:center;justify-content:center;min-width:138px;padding:13px 24px;border-radius:999px;border:1px solid #f6c915;background:#f6c915;transition:background .15s ease,border-color .15s ease}
+.donate:hover{background:#fbce1a;border-color:#fbce1a}
+.donate:has(:focus-visible){outline:2px solid #FFF6F0;outline-offset:3px}
+html > body .donate .liberapay-btn{display:inline-flex!important;align-items:center;gap:8px;background:transparent!important;border-radius:0!important;padding:0!important;color:#1a171b!important;font:600 16px/1.2 var(--font)!important;position:static!important;text-decoration:none!important}
+html > body .donate .liberapay-btn:hover{background:transparent!important}
+.donate .liberapay-btn::after{content:"";position:absolute;inset:0;border-radius:999px}
+.donate .liberapay-btn>svg{position:static!important;width:18px;height:18px;flex:none}
+.donate .liberapay-btn>span{margin-left:0!important}
 .sponsor-soon{align-self:flex-start;margin-top:auto;display:inline-flex;align-items:baseline;flex-wrap:wrap;gap:14px;padding:13px 24px;border-radius:999px;border:1.5px dashed rgba(255,246,240,.7);color:#FFF6F0;font-size:16px;font-weight:600;cursor:default}
 .sponsor-soon s{text-decoration-thickness:2px;opacity:.75}
 .scribble{font-family:"Bradley Hand","Segoe Print","Comic Sans MS",cursive;font-size:21px;font-weight:400;color:#FFF6F0;transform:rotate(-4deg);display:inline-block;white-space:nowrap}
@@ -209,14 +217,14 @@ footer .legal{max-width:520px;line-height:1.5}
 .gate-card .gate-note{margin-top:12px;font-size:12.5px;line-height:1.4;color:var(--muted)}
 
 /* scroll cues */
-.cue{position:fixed;left:50%;bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:40;transform:translateX(-50%);display:flex;align-items:center;gap:8px;padding:9px 16px 9px 14px;border-radius:999px;border:1px solid var(--border);background:color-mix(in oklab,var(--surface-shell) 82%,transparent);backdrop-filter:blur(14px) saturate(1.3);-webkit-backdrop-filter:blur(14px) saturate(1.3);box-shadow:0 8px 24px rgba(30,26,24,.16);color:var(--muted);font:600 13px/1 var(--font);letter-spacing:.02em;cursor:pointer;transition:opacity .35s ease,visibility .35s ease}
+.cue{position:fixed;left:50%;bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:40;transform:translateX(-50%);display:flex;align-items:center;gap:8px;padding:11px;border-radius:999px;border:1px solid var(--border);background:color-mix(in oklab,var(--surface-shell) 82%,transparent);backdrop-filter:blur(14px) saturate(1.3);-webkit-backdrop-filter:blur(14px) saturate(1.3);box-shadow:0 8px 24px rgba(30,26,24,.16);color:var(--muted);font:600 13px/1 var(--font);letter-spacing:.02em;cursor:pointer;transition:opacity .35s ease,visibility .35s ease}
 .cue:hover{color:var(--ink)}
 .cue svg,.hint-arrow{color:var(--accent);animation:cue-bob 2.2s ease-in-out infinite}
 .cue.off{opacity:0;visibility:hidden;pointer-events:none}
 @keyframes cue-bob{0%,100%{transform:translateY(-2px)}50%{transform:translateY(3px)}}
 #toast{position:fixed;left:50%;bottom:calc(76px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:60;width:min(92vw,360px);padding:12px 16px;border-radius:14px;background:var(--surface-card);color:var(--ink);border:1px solid var(--border);box-shadow:var(--shadow-window);font-size:14px;line-height:1.4;text-align:center}
 #demo-hint{display:flex;flex-direction:column;align-items:center;gap:10px;padding:8px 0 20px;background:var(--surface-card);color:var(--muted);transition:opacity .3s ease}
-@media (max-width:480px){.cue span{display:none}.cue{padding:11px}}
+.cue span{display:none}
 @media (prefers-reduced-motion: reduce){.cue svg,.hint-arrow{animation:none}}
 @media (prefers-reduced-motion: reduce){
   .hero-ring,.hero-inner,.hero-shot,.wallpaper,.fan>div,.rm-parallax{transform:none!important}
@@ -249,7 +257,7 @@ picture{display:block}
   #sticky .intro{display:none}
   header.hero{padding-top:20px}
   .hero-inner{gap:16px;justify-content:center;min-height:calc(100svh - 55px - 20px - 100px)}
-  .hero-inner>img{width:clamp(48px,8svh,64px);height:clamp(48px,8svh,64px)}
+  .hero-inner>img{width:clamp(72px,12svh,96px);height:clamp(72px,12svh,96px)}
   .hero-inner h1{font-size:min(10.4vw,5.4svh,46px)}
   .hero-inner p{font-size:clamp(14.5px,2.1svh,16px);line-height:1.45}
   .hero-actions{flex-direction:column;align-items:center;gap:10px;margin-top:2px}
@@ -261,15 +269,10 @@ picture{display:block}
   .item{white-space:normal;border-radius:18px}
   /* widgets: a gentle floating stack, shown large */
   .fan{flex:1 1 100%;min-height:0;display:flex;flex-direction:column;align-items:center;gap:34px;padding:6px 0 0}
-  .fan>div{position:relative;left:auto;top:auto;transform:none!important;translate:0 36px;opacity:0;transition:translate .9s cubic-bezier(.2,.8,.2,1),opacity .9s ease}
-  .fan>div.in{translate:0 0;opacity:1}
+  .fan>div{position:relative;left:auto;top:auto;transform:none!important}
   .fan>div:nth-child(1){zoom:calc(var(--u,1)*1.3);align-self:flex-start}
   .fan>div:nth-child(2){zoom:var(--u,1)}
   .fan>div:nth-child(3){zoom:calc(var(--u,1)*1.22);align-self:flex-end}
-  .fan .widget{animation:floaty 6.5s ease-in-out infinite}
-  .fan>div:nth-child(2) .widget{animation-duration:7.5s;animation-delay:-2s}
-  .fan>div:nth-child(3) .widget{animation-duration:5.8s;animation-delay:-4s}
-  @keyframes floaty{0%,100%{transform:translate3d(0,0,0) rotate(-.6deg)}50%{transform:translate3d(0,-9px,0) rotate(.7deg)}}
   /* concept preview becomes a full-screen viewer */
   #concept{padding:0;align-items:stretch}
   .dialog{max-width:none;height:100%;border-radius:0;display:flex;flex-direction:column;padding-bottom:0;overflow:hidden}
@@ -285,14 +288,21 @@ picture{display:block}
   .zoomer.fit img{width:100%}
   .zoomer.fit{display:flex;align-items:center}
 }
+/* widgets float on their own and ease in once; they are not tied to scrolling */
+.fan>div{translate:0 36px;opacity:0;transition:translate .9s cubic-bezier(.2,.8,.2,1),opacity .9s ease}
+.fan>div.in{translate:0 0;opacity:1}
+.fan .widget{animation:floaty 6.5s ease-in-out infinite}
+.fan>div:nth-child(2) .widget{animation-duration:7.5s;animation-delay:-2s}
+.fan>div:nth-child(3) .widget{animation-duration:5.8s;animation-delay:-4s}
+@keyframes floaty{0%,100%{transform:translate3d(0,0,0) rotate(-.6deg)}50%{transform:translate3d(0,-9px,0) rotate(.7deg)}}
 @media (prefers-reduced-motion: reduce){.fan .widget{animation:none}.fan>div{translate:none;opacity:1;transition:none}}
 </style>
 </head>
 <body>
 <nav class="top pad" aria-label="Main">
   <a href="#top" aria-label="Cap, top of page">
-    <img class="theme-light" src="assets/cap-logo-primary-light.svg" alt="Cap" style="height:30px">
-    <img class="theme-dark" src="assets/cap-logo-primary-dark.svg" alt="" style="height:30px">
+    <img class="theme-light" src="assets/cap-logo-small-light.svg" alt="Cap" style="height:30px">
+    <img class="theme-dark" src="assets/cap-logo-small-dark.svg" alt="" style="height:30px">
   </a>
   <div class="navlinks">
     <a href="#how">How it works</a>
@@ -399,9 +409,9 @@ picture{display:block}
       <p class="rm-lede">Every prompt runs on real hardware that draws real energy and water. Most of us never see that. Cap starts with the usage numbers Claude already reports, and grows toward helping you understand what sits behind them. The better we understand our usage, the more intentionally, ethically and sustainably we can use these tools.</p>
     </div>
     <div class="pillars">
-      <div class="pillar"><span class="eyebrow">Vision</span><p>Anyone who uses AI can see what it costs, and choose with that in mind.</p></div>
-      <div class="pillar"><span class="eyebrow">Mission</span><p>Give Claude users clear, honest numbers about their usage, then the context to act on them.</p></div>
-      <div class="pillar"><span class="eyebrow">Ethos</span><p>Knowing your usage is the first step to using these tools responsibly. Every estimate Cap shows will come with a method anyone can check.</p></div>
+      <div class="pillar"><div class="pi"><svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 14C5.5 8.5 9.5 6 14 6s8.5 2.5 11.5 8c-3 5.5-7 8-11.5 8S5.5 19.5 2.5 14Z"/><circle cx="14" cy="14" r="4"/></svg></div><span class="eyebrow">Vision</span><p>Anyone who uses AI can see what it costs, and choose with that in mind.</p></div>
+      <div class="pillar"><div class="pi"><svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="14" cy="14" r="11"/><circle cx="14" cy="14" r="6.5"/><circle cx="14" cy="14" r="2" fill="currentColor"/></svg></div><span class="eyebrow">Mission</span><p>Give Claude users clear, honest numbers about their usage, then the context to act on them.</p></div>
+      <div class="pillar"><div class="pi"><svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 25V13"/><path d="M14 15C14 9 9.5 5.5 4 5.5 4 11 8 15 14 15Z"/><path d="M14 12.5C14 7.5 18 4 24 4c0 5.5-4 8.5-10 8.5Z"/></svg></div><span class="eyebrow">Ethos</span><p>Knowing your usage is the first step to using these tools responsibly. Every estimate Cap shows will come with a method anyone can check.</p></div>
     </div>
     <div style="display:flex;flex-direction:column;gap:12px">
       <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px;padding-bottom:28px;border-bottom:1.5px solid rgba(11,38,22,.22)">
@@ -449,7 +459,7 @@ picture{display:block}
       <img src="assets/cap-logo-solid-light.svg" alt="" style="height:40px;width:auto">
       <h2 style="font-size:clamp(28px,3.4vw,40px);line-height:1.1;font-weight:700;letter-spacing:-.025em">Appreciate my work? Buy me coffee.</h2>
       <p>Cap is free. If you'd like to chip in, any amount helps cover the time that goes into it.</p>
-      <div class="donate"><script src="https://liberapay.com/bkelson/widgets/button.js"></script><noscript><a href="https://liberapay.com/bkelson/donate"><img alt="Donate using Liberapay" src="https://liberapay.com/assets/widgets/donate.svg"></a></noscript></div>
+      <div class="donate"><script src="https://liberapay.com/bkelson/widgets/button.js"></script><noscript><style>.donate{padding:0;border:0;background:none}</style><a href="https://liberapay.com/bkelson/donate"><img alt="Donate using Liberapay" src="https://liberapay.com/assets/widgets/donate.svg"></a></noscript></div>
     </div>
     <div class="card-contact">
       <span class="eyebrow" style="color:var(--muted)">Contact</span>
@@ -463,8 +473,8 @@ picture{display:block}
 <footer class="pad">
   <div class="wrap">
     <div class="who">
-      <img class="theme-light" src="assets/cap-logo-primary-light.svg" alt="Cap">
-      <img class="theme-dark" src="assets/cap-logo-primary-dark.svg" alt="Cap">
+      <img class="theme-light" src="assets/cap-logo-small-light.svg" alt="Cap">
+      <img class="theme-dark" src="assets/cap-logo-small-dark.svg" alt="Cap">
       <span>Made with ♥ for the Claude community.</span>
     </div>
     <span class="legal">Cap is an independent project and is not made or endorsed by Anthropic. Claude and Claude Code are trademarks of Anthropic.</span>
@@ -775,18 +785,6 @@ picture{display:block}
       var d = r.top + r.height / 2 - innerHeight / 2;
       el.style.transform = 'translate3d(0,' + (d * parseFloat(el.dataset.speed) * k).toFixed(1) + 'px,0)';
     });
-    $$('[data-fan]').forEach(function (el) {
-      var r = el.parentElement.getBoundingClientRect();
-      var cyv = r.top + r.height / 2;
-      var sv = reduced ? 1 : Math.min(1, Math.max(0, (innerHeight - cyv) / (innerHeight * 0.75)));
-      sv = 1 - Math.pow(1 - sv, 2);
-      var ang = parseFloat(el.dataset.fan) * Math.PI / 180;
-      var dist = parseFloat(el.dataset.dist) * sv * (reduced ? 1 : 1);
-      var f = Math.min(1, r.width / 600);
-      var x = (parseFloat(el.dataset.x) + Math.cos(ang) * dist) * f;
-      var y = (parseFloat(el.dataset.y) + Math.sin(ang) * dist) * f;
-      el.style.transform = 'translate3d(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px,0) scale(' + f.toFixed(3) + ')';
-    });
     var tr = tl.getBoundingClientRect();
     var anchor = innerHeight * 0.6;
     var nodes = $$('[data-node]', tl);
@@ -812,8 +810,20 @@ picture{display:block}
     var p = clamp((S.top - dr.top) / Math.max(1, dr.height - sh));
     if (Math.abs(p - S.p) > 0.002) { S.p = p; renderDemo(); }
   }
-  /* phone widget stack: size to the column, and ease each widget in as it arrives */
+  /* widgets: placed from the column width only (never from scroll), then they float on their own */
   var fanEl = $('#fan'), fanKids = $$('#fan>div');
+  function layoutFan() {
+    if (innerWidth < 760) return;   /* phones use a plain stack (see CSS) */
+    fanKids.forEach(function (el) {
+      var r = el.parentElement.getBoundingClientRect();
+      var ang = parseFloat(el.dataset.fan) * Math.PI / 180, dist = parseFloat(el.dataset.dist);
+      var f = Math.min(1, r.width / 600);
+      var x = (parseFloat(el.dataset.x) + Math.cos(ang) * dist) * f;
+      var y = (parseFloat(el.dataset.y) + Math.sin(ang) * dist) * f;
+      el.style.transform = 'translate3d(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px,0) scale(' + f.toFixed(3) + ')';
+    });
+  }
+  layoutFan(); addEventListener('resize', layoutFan); addEventListener('load', layoutFan);
   function sizeFan() { fanEl.style.setProperty('--u', Math.max(0.6, Math.min(1.2, fanEl.clientWidth / 340)).toFixed(3)); }
   sizeFan(); addEventListener('resize', sizeFan);
   if ('IntersectionObserver' in window) {
