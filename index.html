@@ -249,7 +249,9 @@ picture{display:block}
   .stage-box{max-width:none;overflow:visible}
   #stage-size{border:1px solid var(--border);border-radius:18px;box-shadow:var(--shadow-window);background:var(--surface-shell)}
   .stage{border:none;border-radius:0;box-shadow:none}
-  .stage.phone .term{left:22px;width:296px}
+  .stage.phone .term{left:22px;width:316px;display:flex;flex-direction:column;transition:top .55s cubic-bezier(.2,.8,.2,1),height .55s cubic-bezier(.2,.8,.2,1)}
+  .stage.phone .term-bar{flex:none}
+  .stage.phone .term pre{flex:1;min-height:0;overflow:hidden}
 }
 @media (max-width:759px){
   .intro-solo{display:flex;padding-top:32px;padding-bottom:32px}
@@ -295,6 +297,11 @@ picture{display:block}
 .fan>div:nth-child(2) .widget{animation-duration:7.5s;animation-delay:-2s}
 .fan>div:nth-child(3) .widget{animation-duration:5.8s;animation-delay:-4s}
 @keyframes floaty{0%,100%{transform:translate3d(0,0,0) rotate(-.6deg)}50%{transform:translate3d(0,-9px,0) rotate(.7deg)}}
+.line-pulse{border-radius:3px;animation:linePulse 1.1s ease-out}
+@keyframes linePulse{0%{background:rgba(217,116,76,.5);color:#fff}100%{background:rgba(217,116,76,0);color:inherit}}
+.fig.pulse{display:inline-block;transform-origin:right center;animation:figPulse .8s ease-out}
+@keyframes figPulse{0%{transform:scale(1.2)}100%{transform:scale(1)}}
+@media (prefers-reduced-motion: reduce){.line-pulse,.fig.pulse{animation:none}.stage.phone .term{transition:none}}
 @media (prefers-reduced-motion: reduce){.fan .widget{animation:none}.fan>div{translate:none;opacity:1;transition:none}}
 </style>
 </head>
@@ -695,9 +702,10 @@ picture{display:block}
   function dialHTML(pct, size, fill, track) {
     return '<span class="dial" style="width:' + size + 'px;height:' + size + 'px;--fill:conic-gradient(from 180deg,' + fill + ' 0 ' + pct + '%,transparent ' + pct + '%);--track:' + track + '"></span>';
   }
-  function popoverHTML(s, a, left) {
+  function esc(t) { return t.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+  function popoverHTML(s, a, left, pulse) {
     return '<div class="popover"><div class="pop-in"><div class="pop-head"><span>Cap™ - a usage tracker thingy</span><span>ⓘ ⚲</span></div>' +
-      '<div class="pop-row">' + dialHTML(s, 34, '#C4643F', 'rgba(30,26,24,.1)') + '<div><div class="lbl" style="letter-spacing:.1em">Session · 5h</div><div class="t">' + left + ' remaining</div><div class="s">Resets at 8:00 PM</div></div><div class="fig" style="font-size:24px;color:#C4643F">' + s + '%</div></div>' +
+      '<div class="pop-row">' + dialHTML(s, 34, '#C4643F', 'rgba(30,26,24,.1)') + '<div><div class="lbl" style="letter-spacing:.1em">Session · 5h</div><div class="t">' + left + ' remaining</div><div class="s">Resets at 8:00 PM</div></div><div class="fig' + (pulse ? ' pulse' : '') + '" style="font-size:24px;color:#C4643F">' + s + '%</div></div>' +
       '<div class="pop-row" style="border-bottom:none">' + dialHTML(a, 34, '#C4643F', 'rgba(30,26,24,.1)') + '<div><div class="lbl" style="letter-spacing:.1em">All Models · Week</div><div class="t">Resets Thursday</div></div><div class="fig" style="font-size:24px">' + a + '%</div></div></div></div>';
   }
   function widgetHTML(s, a, sub) {
@@ -724,13 +732,33 @@ picture{display:block}
       fillEls[i].style.height = (i < step ? 100 : i === step ? clamp(p * 4 - i) * 100 : 0) + '%';
     });
     $('#menu-cap').innerHTML = '<div style="display:flex;align-items:center;height:24px;padding:0 6px;border-radius:6px;background:' + (popOpen ? 'rgba(30,26,24,.1)' : 'transparent') + '"><div style="position:relative;display:flex;align-items:center;gap:8px;height:18px;padding:0 6px;border-radius:9px;color:var(--ink)"><span class="dial" style="width:14px;height:14px;--fill:conic-gradient(from 180deg,var(--ink) 0 ' + s + '%,transparent ' + s + '%);--track:rgba(30,26,24,.3)"></span><span style="font-size:13px;font-weight:500;font-variant-numeric:tabular-nums">' + s + '%</span></div></div>';
-    dockPop.innerHTML = popoverHTML(s, a, left);
+    if (S.phone) {
+      /* phone: rebuild only when a figure changes, so the figure can pulse once per update */
+      var pk = s + '|' + a + '|' + left;
+      if (pk !== S.popKey) { dockPop.innerHTML = popoverHTML(s, a, left, S.popKey !== undefined); S.popKey = pk; }
+    } else dockPop.innerHTML = popoverHTML(s, a, left);
     dockPop.style.opacity = popOpen ? 1 : 0;
     dockPop.style.transform = popOpen ? 'translateY(0) scale(1)' : 'translateY(-6px) scale(0.97)';
     dockWidget.innerHTML = widgetHTML(s, a, left + ' left');
     dockWidget.style.opacity = wOn ? 1 : 0;
     dockWidget.style.transform = wOn ? 'translateY(0)' : 'translateY(12px)';
-    termEl.textContent = LINES.slice(0, shown).join('\n');
+    var termBox = termEl.parentNode;
+    if (S.phone) {
+      /* phone: the terminal sits below the popover as a short "tail" view while the popover is open */
+      var tail = popOpen;
+      termBox.style.top = tail ? '252px' : '52px';
+      termBox.style.height = tail ? '150px' : '230px';
+      if (shown !== S.shownKey) {
+        var ls = LINES.slice(0, shown).map(esc), li = -1;
+        for (var q = 0; q < shown; q++) if (LINES[q]) li = q;
+        if (S.shownKey !== undefined && li >= 0) ls[li] = '<span class="line-pulse">' + ls[li] + '</span>';
+        termEl.innerHTML = ls.join('\n'); S.shownKey = shown;
+      }
+      termEl.scrollTop = tail ? termEl.scrollHeight : 0;
+    } else {
+      termBox.style.top = ''; termBox.style.height = '';
+      termEl.textContent = LINES.slice(0, shown).join('\n');
+    }
     cursor.style.transform = 'translate(' + cx.toFixed(1) + 'px,' + cy.toFixed(1) + 'px) scale(' + (clicking ? 0.85 : 1) + ')';
     var hint = $('#demo-hint');
     if (hint) hint.style.opacity = (1 - clamp((p - 0.85) / 0.1)).toFixed(3);
@@ -754,7 +782,7 @@ picture{display:block}
       var phone = innerWidth < 760;
       S.phone = phone;
       stage.classList.toggle('phone', phone);
-      var SW = phone ? 360 : 640, SH = phone ? 400 : 440;
+      var SW = phone ? 360 : 640, SH = phone ? 420 : 440;
       stage.style.width = SW + 'px'; stage.style.height = SH + 'px';
       var other = sticky.offsetHeight - stageSize.offsetHeight;
       var availH = S.vh - S.top - 8 - other;
