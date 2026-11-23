@@ -490,9 +490,9 @@ picture{display:block}
     <p>During this early release, Cap hasn't been through Apple's review yet. macOS may show a warning the first time you open it. That's expected, and the install guide walks you through it.</p>
     <div class="gate-actions">
       <a class="btn btn-primary" id="gate-go" href="https://github.com/bkelson/cap/blob/main/INSTALL.md">Download</a>
-      <button class="btn btn-ghost" id="gate-later" type="button">Try later</button>
+      <button class="btn btn-ghost" id="gate-later" type="button" data-gate-close>Try later</button>
     </div>
-    <p class="gate-note">Download starts now. Then you'll be taken to the install steps.</p>
+    <p class="gate-note">The download starts right away. Then you can open the install steps.</p>
   </div>
 </div>
 
@@ -617,12 +617,13 @@ picture{display:block}
       .catch(function () {});
   } catch (e) {}
   var INSTALL_URL = 'https://github.com/bkelson/cap/blob/main/INSTALL.md';
-  var gate = $('#gate'), gateGo = $('#gate-go'), gateLater = $('#gate-later'), lastGate = null;
+  var gate = $('#gate'), gateCard = $('.gate-card'), gateHTML = gateCard.innerHTML, lastGate = null;
   function openGate(e) {
     e.preventDefault();
     lastGate = document.activeElement;
+    gateCard.innerHTML = gateHTML;
     gate.hidden = false;
-    gateGo.focus();
+    $('#gate-go').focus();
   }
   function closeGate() { gate.hidden = true; if (lastGate && lastGate.focus) lastGate.focus(); }
   /* On phones and tablets Cap cannot be installed, so Download becomes "send the link to my Mac" (the system share sheet). */
@@ -648,17 +649,23 @@ picture{display:block}
     if (MOBILE) a.textContent = a.classList.contains('pill') ? 'Send to Mac' : 'Send the link to my Mac';
     a.addEventListener('click', function (e) { if (MOBILE) { e.preventDefault(); shareLink(); } else openGate(e); });
   });
-  gateLater.addEventListener('click', closeGate);
-  gate.addEventListener('click', function (e) { if (e.target === gate) closeGate(); });
-  addEventListener('keydown', function (e) { if (e.key === 'Escape' && !gate.hidden) closeGate(); });
-  gateGo.addEventListener('click', function (e) {
-    e.preventDefault();
-    // Start the download without leaving the page, then take the visitor to the instructions.
-    var dl = document.createElement('a');
-    dl.href = DMG_URL; dl.setAttribute('download', '');
-    document.body.appendChild(dl); dl.click(); dl.remove();
-    setTimeout(function () { window.location.href = INSTALL_URL; }, 1200);
+  gate.addEventListener('click', function (e) {
+    if (e.target === gate || e.target.closest('[data-gate-close]')) { closeGate(); return; }
+    if (e.target.closest('#gate-go')) { e.preventDefault(); startDownload(); }
   });
+  addEventListener('keydown', function (e) { if (e.key === 'Escape' && !gate.hidden) closeGate(); });
+  /* The installer comes from another host (GitHub's release servers), so the browser has to treat it as a normal download.
+     The page therefore stays put: leaving it a moment later can cancel the download, or close Safari's "allow downloads?" prompt.
+     After the download starts, the dialog offers the install steps as the next click. */
+  function startDownload() {
+    window.location.href = DMG_URL;
+    $('#gate-title').textContent = 'Your download is starting';
+    var ps = $$('p', gateCard);
+    ps[0].textContent = 'If your browser asks whether to allow the download, choose Allow. When the file has finished, open the install steps. They walk you through the first launch.';
+    $('.gate-actions', gateCard).innerHTML = '<a class="btn btn-primary" href="' + INSTALL_URL + '">Open the install steps</a><button class="btn btn-ghost" type="button" data-gate-close>Close</button>';
+    ps[1].innerHTML = 'Nothing happening? <a href="' + DMG_URL + '">Download again</a>';
+    var next = $('.gate-actions a', gateCard); if (next) next.focus();
+  }
 
   /* ---------- pinned demo ---------- */
   var STEPS = [
