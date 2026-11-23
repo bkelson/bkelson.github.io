@@ -688,7 +688,7 @@ picture{display:block}
   var stepEls = $$('.step', stepsEl), fillEls = $$('.step-fill', stepsEl);
   var LINES = ['$ claude', '> refactor the parser and add tests', '', '  Reading src/parser.ts', '  Editing src/parser.ts', '  Writing tests/parser.test.ts', '  Running npm test'];
   var PTS_WIDE = [[260, 330, 0], [463, 13, 0.19], [463, 13, 0.3], [360, 230, 0.48], [360, 230, 0.68], [586, 56, 0.76], [440, 300, 0.9], [440, 300, 1]];
-  var PTS_PHONE = [[120, 340, 0], [178, 16, 0.19], [178, 16, 0.3], [200, 230, 0.48], [200, 230, 0.68], [306, 56, 0.76], [190, 330, 0.9], [190, 330, 1]];
+  var PTS_PHONE = [[120, 340, 0], [178, 16, 0.19], [178, 16, 0.3], [200, 230, 0.48], [200, 230, 0.68], [306, 56, 0.76], [190, 190, 0.9], [190, 190, 1]];
   var stage = $('#stage'), stageSize = $('#stage-size'), stageBox = $('#stage-box'), demo = $('#demo'), sticky = $('#sticky');
   var termEl = $('#term'), cursor = $('#cursor'), dockPop = $('#dock-pop'), dockWidget = $('#dock-widget'), row = $('#demo-row'), caps = $('#captions');
   var S = { p: 0, narrow: false, phone: false, scale: 1, top: 68, vh: 0 };
@@ -745,7 +745,7 @@ picture{display:block}
     var termBox = termEl.parentNode;
     if (S.phone) {
       /* phone: the terminal sits below the popover as a short "tail" view while the popover is open */
-      var tail = popOpen;
+      var tail = p >= 0.2;
       termBox.style.top = tail ? '252px' : '52px';
       termBox.style.height = tail ? '150px' : '230px';
       if (shown !== S.shownKey) {
@@ -755,6 +755,9 @@ picture{display:block}
         termEl.innerHTML = ls.join('\n'); S.shownKey = shown;
       }
       termEl.scrollTop = tail ? termEl.scrollHeight : 0;
+      /* once the resize has finished, make sure the tail is really at the bottom */
+      clearTimeout(S.tailTimer);
+      S.tailTimer = setTimeout(function () { termEl.scrollTop = tail ? termEl.scrollHeight : 0; }, 650);
     } else {
       termBox.style.top = ''; termBox.style.height = '';
       termEl.textContent = LINES.slice(0, shown).join('\n');
@@ -784,6 +787,7 @@ picture{display:block}
       stage.classList.toggle('phone', phone);
       var SW = phone ? 360 : 640, SH = phone ? 420 : 440;
       stage.style.width = SW + 'px'; stage.style.height = SH + 'px';
+      dockWidget.style.bottom = '186px';
       var other = sticky.offsetHeight - stageSize.offsetHeight;
       var availH = S.vh - S.top - 8 - other;
       var W = Math.min(700, innerWidth - 40);
@@ -797,6 +801,7 @@ picture{display:block}
       return;
     }
     stage.style.width = ''; stage.style.height = '';
+    dockWidget.style.bottom = '22px';
     stage.classList.remove('phone');
     stageSize.style.height = '';
     var w = S.narrow ? Math.min(700, innerWidth - 40) : Math.min(700, innerWidth - 96 - 420 - 72);
