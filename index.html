@@ -399,8 +399,8 @@ footer .legal{max-width:520px;line-height:1.5}
 
 <div id="gate" role="dialog" aria-modal="true" aria-labelledby="gate-title" hidden>
   <div class="gate-card">
-    <h3 id="gate-title">A few extra steps</h3>
-    <p>Apple hasn't notarized Cap yet, so installing takes a few extra steps. The guide walks you through them.</p>
+    <h3 id="gate-title">Early release, a few extra steps</h3>
+    <p>During this early release, Cap hasn't been through Apple's review yet. macOS may show a warning the first time you open it. That's expected, and the install guide walks you through it.</p>
     <div class="gate-actions">
       <a class="btn btn-primary" id="gate-go" href="https://github.com/bkelson/cap/blob/main/INSTALL.md">Download</a>
       <button class="btn btn-ghost" id="gate-later" type="button">Try later</button>
@@ -500,7 +500,18 @@ footer .legal{max-width:520px;line-height:1.5}
   addEventListener('keydown', function (e) { if (e.key === 'Escape' && modal.classList.contains('open')) closeConcept(); });
 
   /* ---------- install gate: shown before any download ---------- */
+  /* The installer's file name carries the version, so ask GitHub for the latest release's .dmg when the page loads.
+     If that request fails, fall back to the last known file. The click itself stays instant (no waiting). */
   var DMG_URL = 'https://github.com/bkelson/cap/releases/latest/download/Cap-1.0.0.dmg';
+  try {
+    fetch('https://api.github.com/repos/bkelson/cap/releases/latest', { headers: { Accept: 'application/vnd.github+json' } })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (d) {
+        var a = d && d.assets && d.assets.filter(function (x) { return /\.dmg$/i.test(x.name); })[0];
+        if (a && a.browser_download_url) DMG_URL = a.browser_download_url;
+      })
+      .catch(function () {});
+  } catch (e) {}
   var INSTALL_URL = 'https://github.com/bkelson/cap/blob/main/INSTALL.md';
   var gate = $('#gate'), gateGo = $('#gate-go'), gateLater = $('#gate-later'), lastGate = null;
   function openGate(e) {
@@ -527,7 +538,7 @@ footer .legal{max-width:520px;line-height:1.5}
   var STEPS = [
     ['Cap lives in your menu bar.', 'A small dial and your Session percentage, always in view. Switch to Expanded to see All Models too.'],
     ['Click for the full picture.', 'Session time remaining and when it resets, plus your weekly All Models limit and its reset day.'],
-    ['It keeps up while you work.', 'Every five minutes by default, Cap asks your own Claude Code for the usage windows. The dial turns orange at 70% and red at 90%.'],
+    ['It keeps up while you work.', 'Every 15 seconds while you\'re at your Mac, Cap asks your own Claude Code for the usage windows. The dial turns orange at 70% and red at 90%.'],
     ['Pin it to your desktop.', 'One click on the pin and the numbers stay on screen as a widget.']
   ];
   var stepsEl = $('#steps');
