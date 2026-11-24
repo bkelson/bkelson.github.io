@@ -241,7 +241,10 @@ footer{padding-top:40px;padding-bottom:56px;border-top:1px solid var(--hairline)
 footer .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:20px;font-size:13px;color:var(--muted)}
 footer .who{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
 footer .who img{height:24px}
+footer .footlinks{display:flex;flex-wrap:wrap;gap:6px 18px;font-weight:500}
 footer .legal{max-width:520px;line-height:1.5}
+.more{margin-top:8px;text-align:center;font-size:17px;color:var(--muted)}
+.more a{color:var(--button);font-weight:600}
 
 /* concept modal */
 #concept{position:fixed;inset:0;z-index:200;display:none;align-items:center;justify-content:center;padding:clamp(16px,4vw,48px);background:rgba(11,38,22,.55);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
@@ -366,6 +369,7 @@ picture{display:block}
     <a href="#widget">Widget</a>
     <a href="#roadmap">Roadmap</a>
     <a href="#community">Community</a>
+    <a href="/faq/">FAQ</a>
     <a class="pill" href="https://github.com/bkelson/cap/releases/latest" data-download>Download</a>
   </div>
 </nav>
@@ -384,7 +388,7 @@ picture{display:block}
       <a class="btn btn-primary" href="https://github.com/bkelson/cap/releases/latest" data-download>Download for Mac</a>
       <a class="btn btn-ghost" href="https://github.com/bkelson/cap">View on GitHub</a>
     </div>
-    <p class="hero-note"><span class="n-full">Needs macOS 13 or later on Apple silicon, plus Claude Code or the Claude desktop app on a Pro or Max plan.</span><span class="n-short">macOS 13+ · Apple silicon · Pro or Max plan</span></p>
+    <p class="hero-note"><span class="n-full">Needs macOS 13 or later on Apple silicon, plus Claude Code or the Claude desktop app on a Pro, Max or Ultra plan.</span><span class="n-short">macOS 13+ · Apple silicon · Pro, Max or Ultra</span></p>
   </div>
   <div class="hero-shot" data-speed="-0.08">
     <div class="shot">
@@ -430,6 +434,7 @@ picture{display:block}
           <div class="fact"><b>02</b><h3>Checks while you work</h3><p>Every 15 seconds while you're at your Mac, using the smallest model. It naps when you step away.</p></div>
           <div class="fact"><b>03</b><h3>Shows what Claude reports</h3><p>Whole-percent figures exactly as Claude reports them, with the time left and the reset time. No estimates. No vibes.</p></div>
         </div>
+        <p class="more">Still curious? <a href="/faq/">Read the FAQ.</a></p>
       </div>
     </div>
   </div>
@@ -535,6 +540,7 @@ picture{display:block}
       <img class="theme-dark" src="assets/cap-logo-small-dark.svg" alt="Cap">
       <span>Made in Munich with ♥ for the Claude community.</span>
     </div>
+    <nav class="footlinks" aria-label="More"><a href="/faq/">FAQ</a><a href="https://github.com/bkelson/cap/blob/main/INSTALL.md">Install guide</a><a href="https://github.com/bkelson/cap/blob/main/PRIVACY.md">Privacy</a><a href="https://github.com/bkelson/cap">GitHub</a></nav>
     <span class="legal">Cap is an independent project and is not made or endorsed by Anthropic. Claude and Claude Code are trademarks of Anthropic.</span>
   </div>
 </footer>

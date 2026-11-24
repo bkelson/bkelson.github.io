@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cap FAQ: Claude usage limits, sign-in and privacy</title>
+<meta name="description" content="How to check your Claude usage, what the 5-hour and weekly limits mean, and how Cap installs, signs in and handles your data.">
+<link rel="canonical" href="https://cap.kelson.ai/faq/">
+<link rel="icon" href="/assets/favicon/favicon.svg?v=3" type="image/svg+xml">
+<link rel="icon" href="/assets/favicon/favicon.ico?v=2" sizes="48x48">
+<link rel="apple-touch-icon" href="/assets/favicon/apple-touch-icon.png?v=2">
+<link rel="manifest" href="/assets/favicon/site.webmanifest">
+<meta name="theme-color" content="#241E1B">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Cap">
+<meta property="og:url" content="https://cap.kelson.ai/faq/">
+<meta property="og:title" content="Cap FAQ: Claude usage limits, sign-in and privacy">
+<meta property="og:description" content="How to check your Claude usage, what the 5-hour and weekly limits mean, and how Cap installs, signs in and handles your data.">
+<meta property="og:image" content="https://cap.kelson.ai/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Cap FAQ: Claude usage limits, sign-in and privacy">
+<meta name="twitter:description" content="How to check your Claude usage, what the 5-hour and weekly limits mean, and how Cap installs, signs in and handles your data.">
+<meta name="twitter:image" content="https://cap.kelson.ai/assets/og-image.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How do I check my Claude usage?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "There are three ways. On claude.ai, open Settings, then Usage. In Claude Code, type /usage . Or keep Cap in your menu bar and glance up. The first two need a click or a command each time. Cap keeps the numbers in view all day."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the Claude session limit?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Pro and Max plans have a session limit that resets every five hours. Use Claude heavily and you can reach 100% before the reset. Cap shows the percentage used and the time left. Verified Ultra accounts don't have a five-hour limit."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the weekly limit, and when does it reset?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Pro, Max and Ultra plans also have a weekly limit that resets once a week. Reaching a limit stops you until it resets, unless you've turned on usage credits. Cap shows the percentage used and the day it resets, for example \"Resets Thursday\"."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What's the difference between \"Session\" and \"All Models\" in Cap?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Session is your five-hour window. All Models is your weekly limit across every model. They're the two numbers in the popover and the menu bar."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do my limits cover chat as well as Claude Code?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Anthropic says all activity in both tools counts against the same limits. Cap shows your account's limits, so you see your total, not one app's share. Cap needs Claude Code or the Claude desktop app installed, because that's how it reads the numbers."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does Cap show every limit on my plan?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Cap shows two: Session (your five-hour window) and All Models (your weekly limit). Two things it doesn't show yet. Max and Ultra plans have a separate weekly limit for Fable, and Cap doesn't read it. And verified Ultra accounts have no five-hour limit, so Cap's Session figure will be empty for them. I'm exploring showing more limits, and I'll fix the Ultra case."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is Cap free?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Cap is free and open source under the MIT licence, and it stays that way. If it earns a coffee, there's a Donate button at the bottom of the home page ."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Who can use Cap?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "People on a Claude Pro, Max or Ultra plan who use Claude Code or the Claude desktop app, on an Apple silicon Mac (M1 or newer) running macOS 13 or later. Intel Macs aren't supported. Ultra is the plan that used to be called Max 20x."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Claude already shows my usage. Why do I need Cap?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Claude's settings and Claude Code's /usage show your numbers when you go and look. Cap adds a number that's always in the menu bar, alerts at a percentage you choose, and a widget you can pin to your desktop. Cap also never asks for your Claude password or a session key from your browser. Some other trackers do."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is Cap made by Anthropic?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Cap is an independent project and isn't made or endorsed by Anthropic. \"Claude\" and \"Claude Code\" are trademarks of Anthropic."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why is Cap \"a usage tracker thingy\"?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Because it's accurate. Cap does one small job: it shows your Claude usage where you can see it. The tagline stays."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why does macOS warn me when I open Cap?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Apple hasn't notarized Cap yet. Notarizing needs a paid developer membership, and Cap is a free hobby project. The first time you open it, macOS stops it, and the install guide walks you through the fix in about three minutes. You repeat the steps after each update until Cap is notarized, which is planned with no date."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is it safe to open?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Cap is open source, so you can read all of the code or build it yourself. Every release also lists a SHA-256 fingerprint on its release page, so you can check your download before you open it."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does Cap use up my usage?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A little. Each check is a very small request on the smallest model, so the cost to your plan is negligible. Cap checks every 15 seconds while you're at your Mac and naps when you step away."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Will I have to sign in again?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "About once a month. Cap reads your numbers through your own Claude Code sign-in, and those last about 28 to 30 days. A week before yours ends, Cap shows a \"Renew sign-in\" button and sends a notification, and again two days before. Renewing takes one browser approval, about a minute. The early warning needs Claude Code 2.1.318 or later. I'd like that to be less often. I've built and tested a once-a-year version, but I won't release it until I've confirmed that it fits Anthropic's guidelines and keeps your private information private. I've asked Anthropic and I'm waiting to hear back. Until then, Cap stores no key and no password."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why does Cap say it can't find Claude?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Cap reads its numbers through Claude Code. Install Claude Code or the Claude desktop app, and Cap picks it up within a minute."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Are Cap's numbers the same as claude.ai or my bill?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "They're the figures Claude Code reports. Cap isn't a billing tool, so don't expect them to match an invoice."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does Cap ask for my password?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Cap never asks for, reads or stores your password or login token. If you're signed out, it starts Claude Code's own browser sign-in, and you sign in with Claude directly."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What data does Cap collect or send?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "None of your usage figures or account details leave your Mac. Cap has no account and no analytics. The only request Cap makes itself is a daily update check to GitHub, and only if you turn that on. The privacy page lists exactly what Cap reads, writes and sends."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I report a problem or suggest something?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Open an issue on GitHub or email me . Please leave out your Claude login, tokens and conversations. Cap never needs them."
+      }
+    }
+  ]
+}
+</script>
+<style>
+:root{--bg:#F8F5F2;--card:#F4F0EC;--border:#DCD3CC;--ink:#1E1A18;--muted:#685D56;--accent:#C4643F;--button:#B5532F;--on-button:#FFFFFF;--hairline:#E4DDD7;
+  --font:-apple-system,"SF Pro Text","SF Pro Display",system-ui,sans-serif;--mono:ui-monospace,"SF Mono",Menlo,monospace}
+@media (prefers-color-scheme: dark){:root{--bg:#2A2321;--card:#231D1B;--border:#463C36;--ink:#F4F1EE;--muted:#A89D95;--button:#D9744C;--on-button:#1E1A18;--hairline:#3A302B}}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);-webkit-font-smoothing:antialiased;line-height:1.5}
+a{color:inherit;text-decoration:none}
+a:hover{text-decoration:none}
+h1,h2,h3,p{margin:0}
+.pad{padding-left:clamp(20px,4vw,48px);padding-right:clamp(20px,4vw,48px)}
+.theme-dark{display:none}
+@media (prefers-color-scheme: dark){.theme-light{display:none}.theme-dark{display:block}}
+nav.top{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;gap:24px;padding-top:12px;padding-bottom:12px;background:color-mix(in oklab,var(--bg) 78%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--hairline)}
+nav.top img{height:30px}
+.pill{padding:7px 14px;border-radius:999px;background:var(--button);color:var(--on-button);font-size:14px;font-weight:600}
+main{max-width:760px;margin:0 auto;padding:clamp(48px,8vw,96px) clamp(20px,4vw,32px) clamp(64px,9vw,120px)}
+.eyebrow{font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+h1{margin-top:12px;font-size:clamp(38px,6vw,60px);line-height:1.03;font-weight:700;letter-spacing:-.035em;text-wrap:balance}
+.intro{margin-top:18px;font-size:19px;line-height:1.55;color:var(--muted);text-wrap:pretty}
+.intro a,.qa a{color:var(--button);font-weight:600}
+.toc{display:flex;flex-wrap:wrap;gap:8px;margin-top:28px}
+.toc a{padding:8px 14px;border-radius:999px;border:1px solid var(--border);background:var(--card);font-size:14px;font-weight:550;color:var(--muted)}
+section{margin-top:clamp(44px,6vw,64px)}
+h2{font-size:clamp(24px,3vw,30px);line-height:1.15;font-weight:700;letter-spacing:-.025em;padding-bottom:14px;border-bottom:1px solid var(--hairline)}
+.qa{padding:22px 0;border-bottom:1px solid var(--hairline)}
+.qa h3{font-size:19px;line-height:1.3;font-weight:650;letter-spacing:-.01em}
+.qa p{margin-top:8px;font-size:17px;line-height:1.6;color:var(--muted);text-wrap:pretty}
+.qa p + p{margin-top:12px}
+.qa code{font-family:var(--mono);font-size:.9em;padding:1px 6px;border-radius:6px;background:var(--card);border:1px solid var(--border);color:var(--ink)}
+footer{padding-top:40px;padding-bottom:56px;border-top:1px solid var(--hairline)}
+footer .wrap{max-width:1180px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:20px;font-size:13px;color:var(--muted)}
+footer .who{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+footer .who img{height:24px}
+footer .footlinks{display:flex;flex-wrap:wrap;gap:6px 18px;font-weight:500}
+footer .legal{max-width:520px;line-height:1.5}
+</style>
+</head>
+<body>
+<nav class="top pad" aria-label="Main">
+  <a href="/" aria-label="Cap, home">
+    <img class="theme-light" src="/assets/cap-logo-small-light.svg" alt="Cap">
+    <img class="theme-dark" src="/assets/cap-logo-small-dark.svg" alt="">
+  </a>
+  <a class="pill" href="/">Back to Cap</a>
+</nav>
+<main>
+  <span class="eyebrow">FAQ</span>
+  <h1>Your Claude limits, answered.</h1>
+  <p class="intro">Straight answers about your Claude usage and how Cap works. Don't see yours? <a href="mailto:brian@kelson.ai">Email me</a>.</p>
+  <nav class="toc" aria-label="Sections"><a href="#limits">Understanding your Claude limits</a><a href="#about">About Cap</a><a href="#installing">Installing</a><a href="#using">Using Cap</a><a href="#privacy">Privacy</a><a href="#help">Help</a></nav>
+<section id="limits" aria-labelledby="h-limits">
+<h2 id="h-limits">Understanding your Claude limits</h2>
+<div class="qa" id="check-usage"><h3>How do I check my Claude usage?</h3><p>There are three ways. On claude.ai, open Settings, then Usage. In Claude Code, type <code>/usage</code>. Or keep Cap in your menu bar and glance up. The first two need a click or a command each time. Cap keeps the numbers in view all day.</p></div>
+<div class="qa" id="session-limit"><h3>What is the Claude session limit?</h3><p>Pro and Max plans have a session limit that resets every five hours. Use Claude heavily and you can reach 100% before the reset. Cap shows the percentage used and the time left. Verified Ultra accounts don't have a five-hour limit.</p></div>
+<div class="qa" id="weekly-limit"><h3>What is the weekly limit, and when does it reset?</h3><p>Pro, Max and Ultra plans also have a weekly limit that resets once a week. Reaching a limit stops you until it resets, unless you've turned on usage credits. Cap shows the percentage used and the day it resets, for example "Resets Thursday".</p></div>
+<div class="qa" id="session-vs-all-models"><h3>What's the difference between "Session" and "All Models" in Cap?</h3><p>Session is your five-hour window. All Models is your weekly limit across every model. They're the two numbers in the popover and the menu bar.</p></div>
+<div class="qa" id="chat-and-code"><h3>Do my limits cover chat as well as Claude Code?</h3><p>Yes. Anthropic says all activity in both tools counts against the same limits. Cap shows your account's limits, so you see your total, not one app's share. Cap needs Claude Code or the Claude desktop app installed, because that's how it reads the numbers.</p></div>
+<div class="qa" id="every-limit"><h3>Does Cap show every limit on my plan?</h3><p>Cap shows two: Session (your five-hour window) and All Models (your weekly limit). Two things it doesn't show yet. Max and Ultra plans have a separate weekly limit for Fable, and Cap doesn't read it. And verified Ultra accounts have no five-hour limit, so Cap's Session figure will be empty for them. I'm exploring showing more limits, and I'll fix the Ultra case.</p></div>
+</section>
+<section id="about" aria-labelledby="h-about">
+<h2 id="h-about">About Cap</h2>
+<div class="qa" id="free"><h3>Is Cap free?</h3><p>Yes. Cap is free and open source under the MIT licence, and it stays that way. If it earns a coffee, there's a Donate button at the bottom of the <a href="/#support">home page</a>.</p></div>
+<div class="qa" id="who-can-use"><h3>Who can use Cap?</h3><p>People on a Claude Pro, Max or Ultra plan who use Claude Code or the Claude desktop app, on an Apple silicon Mac (M1 or newer) running macOS 13 or later. Intel Macs aren't supported. Ultra is the plan that used to be called Max 20x.</p></div>
+<div class="qa" id="why-cap"><h3>Claude already shows my usage. Why do I need Cap?</h3><p>Claude's settings and Claude Code's <code>/usage</code> show your numbers when you go and look. Cap adds a number that's always in the menu bar, alerts at a percentage you choose, and a widget you can pin to your desktop. Cap also never asks for your Claude password or a session key from your browser. Some other trackers do.</p></div>
+<div class="qa" id="anthropic"><h3>Is Cap made by Anthropic?</h3><p>No. Cap is an independent project and isn't made or endorsed by Anthropic. "Claude" and "Claude Code" are trademarks of Anthropic.</p></div>
+<div class="qa" id="thingy"><h3>Why is Cap "a usage tracker thingy"?</h3><p>Because it's accurate. Cap does one small job: it shows your Claude usage where you can see it. The tagline stays.</p></div>
+</section>
+<section id="installing" aria-labelledby="h-installing">
+<h2 id="h-installing">Installing</h2>
+<div class="qa" id="macos-warning"><h3>Why does macOS warn me when I open Cap?</h3><p>Apple hasn't notarized Cap yet. Notarizing needs a paid developer membership, and Cap is a free hobby project. The first time you open it, macOS stops it, and the <a href="https://github.com/bkelson/cap/blob/main/INSTALL.md">install guide</a> walks you through the fix in about three minutes. You repeat the steps after each update until Cap is notarized, which is planned with no date.</p></div>
+<div class="qa" id="safe"><h3>Is it safe to open?</h3><p>Cap is open source, so you can <a href="https://github.com/bkelson/cap">read all of the code</a> or build it yourself. Every release also lists a SHA-256 fingerprint on its release page, so you can check your download before you open it.</p></div>
+</section>
+<section id="using" aria-labelledby="h-using">
+<h2 id="h-using">Using Cap</h2>
+<div class="qa" id="uses-usage"><h3>Does Cap use up my usage?</h3><p>A little. Each check is a very small request on the smallest model, so the cost to your plan is negligible. Cap checks every 15 seconds while you're at your Mac and naps when you step away.</p></div>
+<div class="qa" id="sign-in-again"><h3>Will I have to sign in again?</h3><p>About once a month. Cap reads your numbers through your own Claude Code sign-in, and those last about 28 to 30 days. A week before yours ends, Cap shows a "Renew sign-in" button and sends a notification, and again two days before. Renewing takes one browser approval, about a minute. The early warning needs Claude Code 2.1.318 or later.</p><p>I'd like that to be less often. I've built and tested a once-a-year version, but I won't release it until I've confirmed that it fits Anthropic's guidelines and keeps your private information private. I've asked Anthropic and I'm waiting to hear back. Until then, Cap stores no key and no password.</p></div>
+<div class="qa" id="cant-find-claude"><h3>Why does Cap say it can't find Claude?</h3><p>Cap reads its numbers through Claude Code. Install Claude Code or the Claude desktop app, and Cap picks it up within a minute.</p></div>
+<div class="qa" id="numbers-match"><h3>Are Cap's numbers the same as claude.ai or my bill?</h3><p>They're the figures Claude Code reports. Cap isn't a billing tool, so don't expect them to match an invoice.</p></div>
+</section>
+<section id="privacy" aria-labelledby="h-privacy">
+<h2 id="h-privacy">Privacy</h2>
+<div class="qa" id="password"><h3>Does Cap ask for my password?</h3><p>No. Cap never asks for, reads or stores your password or login token. If you're signed out, it starts Claude Code's own browser sign-in, and you sign in with Claude directly.</p></div>
+<div class="qa" id="data"><h3>What data does Cap collect or send?</h3><p>None of your usage figures or account details leave your Mac. Cap has no account and no analytics. The only request Cap makes itself is a daily update check to GitHub, and only if you turn that on. The <a href="https://github.com/bkelson/cap/blob/main/PRIVACY.md">privacy page</a> lists exactly what Cap reads, writes and sends.</p></div>
+</section>
+<section id="help" aria-labelledby="h-help">
+<h2 id="h-help">Help</h2>
+<div class="qa" id="report"><h3>How do I report a problem or suggest something?</h3><p>Open an <a href="https://github.com/bkelson/cap/issues">issue on GitHub</a> or <a href="mailto:brian@kelson.ai">email me</a>. Please leave out your Claude login, tokens and conversations. Cap never needs them.</p></div>
+</section>
+</main>
+<footer class="pad">
+  <div class="wrap">
+    <div class="who">
+      <img class="theme-light" src="/assets/cap-logo-small-light.svg" alt="Cap">
+      <img class="theme-dark" src="/assets/cap-logo-small-dark.svg" alt="Cap">
+      <span>Made in Munich with ♥ for the Claude community.</span>
+    </div>
+    <nav class="footlinks" aria-label="More"><a href="/">Home</a><a href="/faq/">FAQ</a><a href="https://github.com/bkelson/cap/blob/main/INSTALL.md">Install guide</a><a href="https://github.com/bkelson/cap/blob/main/PRIVACY.md">Privacy</a><a href="https://github.com/bkelson/cap">GitHub</a></nav>
+    <span class="legal">Cap is an independent project and is not made or endorsed by Anthropic. Claude and Claude Code are trademarks of Anthropic.</span>
+  </div>
+</footer>
+</body>
+</html>
