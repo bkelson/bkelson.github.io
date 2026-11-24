@@ -920,5 +920,18 @@ picture{display:block}
   });
 })();
 </script>
+<script>
+/* Swap the tab icon the moment the system appearance changes. */
+(function(){
+  try{
+    var mq=window.matchMedia('(prefers-color-scheme: dark)');
+    var link=document.querySelector('link[rel="icon"][type="image/svg+xml"]');
+    if(!mq||!link)return;
+    function set(){link.href='assets/favicon/favicon-'+(mq.matches?'dark':'light')+'.svg?v=4';}
+    set();
+    if(mq.addEventListener)mq.addEventListener('change',set);else if(mq.addListener)mq.addListener(set);
+  }catch(e){}
+})();
+</script>
 </body>
 </html>
