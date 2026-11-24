@@ -10,6 +10,47 @@
 <meta name="theme-color" content="#241E1B">
 <title>Cap: the Claude usage tracker thingy for Mac</title>
 <meta name="description" content="Free Mac menu bar app that tracks your Claude usage across chat and Claude Code: session and weekly limits, reset countdown, alerts you set.">
+<link rel="canonical" href="https://cap.kelson.ai/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Cap">
+<meta property="og:url" content="https://cap.kelson.ai/">
+<meta property="og:title" content="Cap, a usage tracker thingy for Claude">
+<meta property="og:description" content="Free Mac menu bar app that tracks your Claude usage across chat and Claude Code: session and weekly limits, reset countdown, alerts you set.">
+<meta property="og:image" content="https://cap.kelson.ai/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Cap's popover open under the Mac menu bar, showing Claude session and weekly usage">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Cap, a usage tracker thingy for Claude">
+<meta name="twitter:description" content="Free Mac menu bar app that tracks your Claude usage across chat and Claude Code: session and weekly limits, reset countdown, alerts you set.">
+<meta name="twitter:image" content="https://cap.kelson.ai/assets/og-image.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Cap",
+  "alternateName": "Cap, a usage tracker thingy for Claude",
+  "description": "Free Mac menu bar app that tracks your Claude usage across chat and Claude Code: session and weekly limits, reset countdown, alerts you set.",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "macOS 13 or later (Apple silicon)",
+  "url": "https://cap.kelson.ai/",
+  "downloadUrl": "https://github.com/bkelson/cap/releases/latest",
+  "image": "https://cap.kelson.ai/assets/og-image.png",
+  "isAccessibleForFree": true,
+  "license": "https://github.com/bkelson/cap/blob/main/LICENSE",
+  "codeRepository": "https://github.com/bkelson/cap",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "author": {
+    "@type": "Person",
+    "name": "bkelson",
+    "url": "https://github.com/bkelson"
+  }
+}
+</script>
 <style>
 :root{
   --surface-shell:#F8F5F2;--surface-card:#F4F0EC;--surface-strip:#E4DCD5;--surface-notice:#ECE5DF;
@@ -347,8 +388,8 @@ picture{display:block}
   </div>
   <div class="hero-shot" data-speed="-0.08">
     <div class="shot">
-      <picture class="theme-light"><source media="(max-width:759px)" srcset="assets/hero-mobile-light.png" width="792" height="622"><img src="assets/hero-light.png" width="1760" height="720" alt="Cap's popover open under the menu bar, showing Session at 35% and All Models at 20%"></picture>
-      <picture class="theme-dark"><source media="(max-width:759px)" srcset="assets/hero-mobile-dark.png" width="792" height="622"><img src="assets/hero-dark.png" width="1760" height="720" alt="Cap's popover open under the menu bar, showing Session at 35% and All Models at 20%"></picture>
+      <picture class="theme-light"><source media="(max-width:759px)" srcset="assets/hero-mobile-light.webp" width="792" height="622"><img src="assets/hero-light.webp" width="1760" height="720" alt="Cap's popover open under the menu bar, showing Session at 35% and All Models at 20%"></picture>
+      <picture class="theme-dark"><source media="(max-width:759px)" srcset="assets/hero-mobile-dark.webp" width="792" height="622"><img src="assets/hero-dark.webp" width="1760" height="720" alt="Cap's popover open under the menu bar, showing Session at 35% and All Models at 20%"></picture>
     </div>
   </div>
 </header>
@@ -363,7 +404,7 @@ picture{display:block}
       <div class="demo-row" id="demo-row">
         <div class="captions" id="captions">
           <span class="eyebrow" style="color:var(--accent)">How it works</span>
-          <div id="steps" style="display:flex;flex-direction:column;gap:22px"></div>
+          <div id="steps" style="display:flex;flex-direction:column;gap:22px"><div class="step"><div class="step-bar"><div class="step-fill"></div></div><div><h3>Cap lives in your menu bar.</h3><p>A small dial and your Session percentage, always in view. Switch to Expanded to see All Models too.</p></div></div><div class="step"><div class="step-bar"><div class="step-fill"></div></div><div><h3>Click for the full picture.</h3><p>Session time remaining and when it resets, plus your weekly All Models limit and its reset day.</p></div></div><div class="step"><div class="step-bar"><div class="step-fill"></div></div><div><h3>It keeps up while you work.</h3><p>Every 15 seconds while you're at your Mac, Cap asks your own Claude Code for the usage windows. The dial turns orange at 70% and red at 90%.</p></div></div><div class="step"><div class="step-bar"><div class="step-fill"></div></div><div><h3>Pin it to your desktop.</h3><p>One click on the pin and the numbers stay on screen as a widget.</p></div></div></div>
         </div>
         <div class="stage-box" id="stage-box">
           <div class="stage-size" id="stage-size">
@@ -437,9 +478,9 @@ picture{display:block}
           <p style="font-size:16px;color:#123A22">A plan, not a promise. Items change.</p>
           <p style="display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:14px;color:#123A22"><span class="chip">Concept</span><span>Click to preview an early design.</span></p>
         </div>
-        <div class="legend" id="legend"></div>
+        <div class="legend" id="legend"><span><span class="mark" style="border:1.5px solid #0B2616;background:#0B2616">✓</span>Done</span><span><span class="mark" style="border:1.5px solid #0B2616;background:transparent"></span>Planned</span><span><span class="mark" style="border:1.5px solid #0B2616;background:linear-gradient(90deg,#0B2616 50%,transparent 50%)"></span>Exploring</span><span><span class="mark" style="border:1.5px dotted #0B2616;background:transparent"></span>Idea</span></div>
       </div>
-      <div class="tl" id="timeline"><div class="tl-fill" id="tl-fill"></div><div class="tl-dot" id="tl-dot"></div></div>
+      <div class="tl" id="timeline"><div class="tl-fill" id="tl-fill"></div><div class="tl-dot" id="tl-dot"></div><div class="phase"><div class="rail"><div class="line" style="border-left-style:solid;opacity:0.35"></div><div class="node" data-node="" style="background: rgb(11, 38, 22);"><i data-node-dot="" style="background: rgb(127, 230, 172);"></i></div></div><div class="phase-body" data-phase="" style="border-bottom: 1.5px solid rgba(11, 38, 22, 0.22);"><div class="phase-head"><div style="display:flex;align-items:center;gap:10px"><span class="k">Phase 1</span><span class="chip" style="background:#0B2616;color:#7FE6AC">Now</span></div><h4>A dependable core</h4><p>Stable, easy to install, right about the basics.</p></div><div class="items"><span class="item" title="Done" style="background:rgba(233,251,240,.62)"><span class="mark" style="border:1.5px solid #0B2616;background:#0B2616;opacity:1">✓</span>Menu bar, popover and widget</span><span class="item" title="Done" style="background:rgba(233,251,240,.62)"><span class="mark" style="border:1.5px solid #0B2616;background:#0B2616;opacity:1">✓</span>Limit and sign-in alerts</span><span class="item" title="Planned" style="background:rgba(233,251,240,.62)"><span class="mark" style="border:1.5px solid #0B2616;background:transparent;opacity:1"></span>Notarization (no more warning)</span><span class="item" title="Planned" style="background:rgba(233,251,240,.62)"><span class="mark" style="border:1.5px solid #0B2616;background:transparent;opacity:1"></span>One-click updates</span><span class="item" title="Planned" style="background:rgba(233,251,240,.62)"><span class="mark" style="border:1.5px solid #0B2616;background:transparent;opacity:1"></span>FAQ and contributing guide</span><span class="item" title="Planned" style="background:rgba(233,251,240,.62)"><span class="mark" style="border:1.5px solid #0B2616;background:transparent;opacity:1"></span>Extra-usage status</span><span class="item" title="Planned" style="background:rgba(233,251,240,.62)"><span class="mark" style="border:1.5px solid #0B2616;background:transparent;opacity:1"></span>Accessibility check</span><span class="item idea" title="Idea" style=""><span class="mark" style="border:1.5px dotted #0B2616;background:transparent;opacity:0.78"></span>Install through Homebrew</span></div></div></div><div class="phase"><div class="rail"><div class="line" style="border-left-style:solid;opacity:0.35"></div><div class="node" data-node="" style="background: rgb(233, 251, 240);"><i data-node-dot="" style="background: rgb(11, 38, 22);"></i></div></div><div class="phase-body" data-phase="" style="border-bottom: 1.5px solid rgba(11, 38, 22, 0.22);"><div class="phase-head"><div style="display:flex;align-items:center;gap:10px"><span class="k">Phase 2</span></div><h4>More to see, more ways to see it</h4><p>Show more of what matters, without making Cap complicated.</p></div><div class="items"><span class="item" title="Exploring" style="background:rgba(233,251,240,.62)"><span class="mark" style="border:1.5px solid #0B2616;background:linear-gradient(90deg,#0B2616 50%,transparent 50%);opacity:1"></span>Token usage</span><span class="item has-concept" role="button" tabindex="0" data-concept="Usage%20history" title="Preview the design concept" style="background:rgba(233,251,240,.62)"><span class="mark" style="border:1.5px solid #0B2616;background:linear-gradient(90deg,#0B2616 50%,transparent 50%);opacity:1"></span>Usage history<span class="chip" style="margin-left:2px">Concept</span></span><span class="item" title="Exploring" style="background:rgba(233,251,240,.62)"><span class="mark" style="border:1.5px solid #0B2616;background:linear-gradient(90deg,#0B2616 50%,transparent 50%);opacity:1"></span>Pacing ("you'll hit your limit around 3 pm")</span><span class="item" title="Exploring" style="background:rgba(233,251,240,.62)"><span class="mark" style="border:1.5px solid #0B2616;background:linear-gradient(90deg,#0B2616 50%,transparent 50%);opacity:1"></span>Modular readings</span><span class="item" title="Exploring" style="background:rgba(233,251,240,.62)"><span class="mark" style="border:1.5px solid #0B2616;background:linear-gradient(90deg,#0B2616 50%,transparent 50%);opacity:1"></span>Cap Labs</span><span class="item" title="Exploring" style="background:rgba(233,251,240,.62)"><span class="mark" style="border:1.5px solid #0B2616;background:linear-gradient(90deg,#0B2616 50%,transparent 50%);opacity:1"></span>Claude API usage</span><span class="item" title="Planned" style="background:rgba(233,251,240,.62)"><span class="mark" style="border:1.5px solid #0B2616;background:transparent;opacity:1"></span>A few more display options</span><span class="item idea" title="Idea" style=""><span class="mark" style="border:1.5px dotted #0B2616;background:transparent;opacity:0.78"></span>Mac widgets and Shortcuts</span><span class="item idea" title="Idea" style=""><span class="mark" style="border:1.5px dotted #0B2616;background:transparent;opacity:0.78"></span>More languages</span></div></div></div><div class="phase"><div class="rail"><div class="line" style="border-left-style:solid;opacity:0.35"></div><div class="node" data-node="" style="background: rgb(233, 251, 240);"><i data-node-dot="" style="background: rgb(11, 38, 22);"></i></div></div><div class="phase-body" data-phase="" style="border-bottom: 1.5px solid rgba(11, 38, 22, 0.22);"><div class="phase-head"><div style="display:flex;align-items:center;gap:10px"><span class="k">Phase 3</span></div><h4>Informed choices</h4><p>Where we are headed; each part only happens with a method we can defend and show.</p></div><div class="items"><span class="item has-concept" role="button" tabindex="0" data-concept="Energy%20and%20water%20estimates" title="Preview the design concept" style="background:rgba(233,251,240,.62)"><span class="mark" style="border:1.5px solid #0B2616;background:linear-gradient(90deg,#0B2616 50%,transparent 50%);opacity:1"></span>Energy and water estimates<span class="chip" style="margin-left:2px">Concept</span></span><span class="item" title="Exploring" style="background:rgba(233,251,240,.62)"><span class="mark" style="border:1.5px solid #0B2616;background:linear-gradient(90deg,#0B2616 50%,transparent 50%);opacity:1"></span>Open, public methodology</span><span class="item idea" title="Idea" style=""><span class="mark" style="border:1.5px dotted #0B2616;background:transparent;opacity:0.78"></span>Suggestions for lighter prompting</span><span class="item idea" title="Idea" style=""><span class="mark" style="border:1.5px dotted #0B2616;background:transparent;opacity:0.78"></span>"Start fresh?" nudge for long chats</span><span class="item idea" title="Idea" style=""><span class="mark" style="border:1.5px dotted #0B2616;background:transparent;opacity:0.78"></span>Per-project view</span><span class="item idea has-concept" role="button" tabindex="0" data-concept="Weekly%20summary" title="Preview the design concept" style=""><span class="mark" style="border:1.5px dotted #0B2616;background:transparent;opacity:0.78"></span>Weekly summary<span class="chip" style="margin-left:2px">Concept</span></span><span class="item idea" title="Idea" style=""><span class="mark" style="border:1.5px dotted #0B2616;background:transparent;opacity:0.78"></span>Open guide to lighter prompting</span></div></div></div><div class="phase"><div class="rail"><div class="line" style="border-left-style:dashed;opacity:0.5"></div><div class="node" data-node="" style="background: transparent;"><i data-node-dot="" style="background: transparent;"></i></div></div><div class="phase-body" data-phase="" style="border-bottom-width: medium; border-bottom-style: none; border-bottom-color: currentcolor;"><div class="phase-head"><div style="display:flex;align-items:center;gap:10px"><span class="k">Beyond</span></div><h4>Dreams, not plans</h4></div><div class="items"><span class="item idea has-concept" role="button" tabindex="0" data-concept="Efficiency%20insights" title="Preview the design concept" style=""><span class="mark" style="border:1.5px dotted #0B2616;background:transparent;opacity:0.78"></span>Efficiency insights<span class="chip" style="margin-left:2px">Concept</span></span><span class="item idea" title="Idea" style=""><span class="mark" style="border:1.5px dotted #0B2616;background:transparent;opacity:0.78"></span>iPhone and Watch companion</span><span class="item idea" title="Idea" style=""><span class="mark" style="border:1.5px dotted #0B2616;background:transparent;opacity:0.78"></span>Open interface and community modules</span><span class="item idea" title="Idea" style=""><span class="mark" style="border:1.5px dotted #0B2616;background:transparent;opacity:0.78"></span>Opt-in anonymous comparisons</span><span class="item idea" title="Idea" style=""><span class="mark" style="border:1.5px dotted #0B2616;background:transparent;opacity:0.78"></span>Team view</span><span class="item idea" title="Idea" style=""><span class="mark" style="border:1.5px dotted #0B2616;background:transparent;opacity:0.78"></span>Open dataset for researchers</span></div></div></div></div>
       <a class="roadmap-link" href="https://github.com/bkelson/cap/blob/main/ROADMAP.md">Read the full roadmap</a>
     </div>
   </div>
@@ -546,10 +587,10 @@ picture{display:block}
   };
   // Concept details. "img" is set only where a Claude Design image exists.
   var CONCEPTS = {
-    'Usage history': { desc: 'A look back at how your Session and All Models usage moved over the past days and weeks.', img: 'concepts/concept-1-history-desktop-light.png', alt: 'Concept: a 30-day chart of the session and weekly limits, with each weekly reset marked.' },
-    'Energy and water estimates': { desc: 'An estimate of the energy and water behind your usage, shown next to the method used to calculate it.', img: 'concepts/concept-4-range-desktop-light.png', alt: 'Concept: the energy, water and carbon range card, with each figure shown as a range and the method beside it.' },
-    'Weekly summary': { desc: 'A warm one-page summary of your week: how much of each limit you used, when you were busiest and what reset when, made to be shared.', img: 'concepts/concept-2-weekly-desktop-dark.png', alt: 'Concept: a weekly summary card showing the session and weekly limits, the busiest day and hours, and what reset when.' },
-    'Efficiency insights': { desc: 'Only if you switch it on: a quiet look at when you work and how much context is reused. Cap shows exactly what it reads before it starts.', img: 'concepts/concept-3-combined-desktop-dark.png', alt: 'Concept: the efficiency insights consent sheet, with the insights popover and widget beside it.' },
+    'Usage history': { desc: 'A look back at how your Session and All Models usage moved over the past days and weeks.', img: 'concepts/concept-1-history-desktop-light.webp', alt: 'Concept: a 30-day chart of the session and weekly limits, with each weekly reset marked.' },
+    'Energy and water estimates': { desc: 'An estimate of the energy and water behind your usage, shown next to the method used to calculate it.', img: 'concepts/concept-4-range-desktop-light.webp', alt: 'Concept: the energy, water and carbon range card, with each figure shown as a range and the method beside it.' },
+    'Weekly summary': { desc: 'A warm one-page summary of your week: how much of each limit you used, when you were busiest and what reset when, made to be shared.', img: 'concepts/concept-2-weekly-desktop-dark.webp', alt: 'Concept: a weekly summary card showing the session and weekly limits, the busiest day and hours, and what reset when.' },
+    'Efficiency insights': { desc: 'Only if you switch it on: a quiet look at when you work and how much context is reused. Cap shows exactly what it reads before it starts.', img: 'concepts/concept-3-combined-desktop-dark.webp', alt: 'Concept: the efficiency insights consent sheet, with the insights popover and widget beside it.' },
     'Pacing ("you\'ll hit your limit around 3 pm")': { desc: 'A forecast of when you will reach your limit at your current pace, so you can plan the rest of the session.', img: null },
     '"Start fresh?" nudge for long chats': { desc: 'A gentle prompt when a long conversation is using more than it needs to, suggesting a fresh start.', img: null }
   };
@@ -560,10 +601,12 @@ picture{display:block}
     { k: 'Beyond', title: 'Dreams, not plans', sub: '', items: [['Idea', 'Efficiency insights'], ['Idea', 'iPhone and Watch companion'], ['Idea', 'Open interface and community modules'], ['Idea', 'Opt-in anonymous comparisons'], ['Idea', 'Team view'], ['Idea', 'Open dataset for researchers']] }
   ];
   var legend = $('#legend');
+  legend.innerHTML = '';
   ['Done', 'Planned', 'Exploring', 'Idea'].forEach(function (n) {
     legend.insertAdjacentHTML('beforeend', '<span><span class="mark" style="border:' + TAG[n].border + ';background:' + TAG[n].bg + '">' + TAG[n].mark + '</span>' + n + '</span>');
   });
   var tl = $('#timeline');
+  $$('.phase', tl).forEach(function (e) { e.remove(); });
   PHASES.forEach(function (ph, i) {
     var last = i === PHASES.length - 1, first = i === 0;
     var stem = last ? 'dashed' : 'solid';
