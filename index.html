@@ -987,5 +987,39 @@ picture{display:block}
   }catch(e){}
 })();
 </script>
+<script data-goatcounter="https://kelson.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+<script>
+/* Count a few button clicks as GoatCounter events. No cookies, no personal data. */
+(function () {
+  var ua = navigator.userAgent || '';
+  var phone = /iPhone|iPad|iPod|Android/.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1);
+  function send(name) {
+    try { if (window.goatcounter && window.goatcounter.count) window.goatcounter.count({ path: name, title: name, event: true }); } catch (e) {}
+  }
+  document.addEventListener('click', function (e) {
+    var t = e.target;
+    if (!t || !t.closest) return;
+    var name = null;
+    var dl = t.closest('[data-download]');
+    if (t.closest('#gate-go')) name = 'download-confirmed';
+    else if (t.closest('#gate-later')) name = 'download-later';
+    else if (dl) name = 'download-click-' + (dl.closest('nav') ? 'nav' : dl.closest('header') ? 'hero' : 'other') + (phone ? '-phone' : '');
+    else if (t.closest('[data-concept]')) name = 'roadmap-concept-open';
+    else if (t.closest('.donate, a[href*="liberapay.com"]')) name = 'donate-click';
+    else {
+      var a = t.closest('a[href]');
+      if (a) {
+        var h = a.getAttribute('href') || '';
+        if (/INSTALL\.md/.test(h)) name = 'install-guide-click';
+        else if (/^mailto:/.test(h)) name = 'email-click';
+        else if (/\/faq\/?$/.test(h)) name = 'faq-click';
+        else if (/github\.com\/bkelson\/cap/.test(h)) name = 'github-click';
+      }
+    }
+    if (name) send(name);
+  }, true);
+})();
+</script>
 </body>
 </html>
