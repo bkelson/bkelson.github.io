@@ -290,6 +290,8 @@ footer .legal{max-width:520px;line-height:1.5}
 
 /* ---- adaptive layouts for tablets and phones ---- */
 .intro-solo{display:none}
+#how.intro-out .intro-solo{display:flex;padding-top:32px;padding-bottom:32px}
+#how.intro-out #intro-inline{display:none}
 picture{display:block}
 @media (max-width:999px){
   #sticky{top:55px}
@@ -840,6 +842,7 @@ picture{display:block}
     S.top = parseFloat(getComputedStyle(sticky).top) || 68;
     S.vh = (probe.offsetHeight || innerHeight);
     if (S.narrow) {
+      how.classList.remove('intro-out');
       /* Phones get a stage drawn for a narrow screen (360 wide); tablets keep the full 640 stage. Both are scaled to the column. */
       var phone = innerWidth < 760;
       S.phone = phone;
@@ -863,11 +866,22 @@ picture{display:block}
     dockWidget.style.bottom = '22px';
     stage.classList.remove('phone');
     stageSize.style.height = '';
-    var w = S.narrow ? Math.min(700, innerWidth - 40) : Math.min(700, innerWidth - 96 - 420 - 72);
-    var howH = $('#how-inner').offsetHeight;
-    var other = howH - 440 * S.scale;
-    var availH = innerHeight - S.top - 8 - other;
-    var scale = Math.max(0.4, Math.min(1, w / 640, availH / 440));
+    var w = Math.min(700, innerWidth - 96 - 420 - 72);
+    how.classList.remove('intro-out');
+    var fitW = Math.min(1, w / 640);
+    var introEl = $('#intro-inline'), inner = $('#how-inner');
+    /* Space the row adds around its tallest child, and everything in the pinned frame that is not the row. */
+    var pad = row.offsetHeight - Math.max(caps.offsetHeight, stageSize.offsetHeight);
+    var outside = inner.offsetHeight - row.offsetHeight;
+    var room = innerHeight - S.top - 8;
+    /* If the "Introducing" band, the demo and the hint do not all fit, show the band above the demo instead. */
+    if (outside + pad + Math.max(caps.offsetHeight, 440 * fitW) > room) {
+      how.classList.add('intro-out');
+      outside = inner.offsetHeight - row.offsetHeight;
+    }
+    /* The stage may grow to the height of the captions for free, because the row is that tall anyway. */
+    var availH = Math.max(caps.offsetHeight, room - outside - pad);
+    var scale = Math.max(0.4, Math.min(fitW, availH / 440));
     S.scale = scale;
     stage.style.transform = 'scale(' + scale.toFixed(3) + ')';
     stageSize.style.width = Math.round(640 * scale) + 'px';
