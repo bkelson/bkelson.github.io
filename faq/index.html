@@ -120,10 +120,10 @@
     },
     {
       "@type": "Question",
-      "name": "Why does macOS warn me when I open Cap?",
+      "name": "Will macOS warn me when I open Cap?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Apple hasn't notarized Cap yet. Notarizing needs a paid developer membership, and Cap is a free hobby project. The first time you open it, macOS stops it, and the install guide walks you through the fix in about three minutes. You repeat the steps after each update until Cap is notarized, which is planned with no date."
+        "text": "Only with its usual question for any app downloaded from the internet: click Open. Since version 1.0.1, Cap is signed with an Apple Developer ID and notarized by Apple. To update, quit Cap, open the new download, drag Cap onto Applications and choose Replace."
       }
     },
     {
@@ -131,7 +131,7 @@
       "name": "Is it safe to open?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Cap is open source, so you can read all of the code or build it yourself. Every release also lists a SHA-256 fingerprint on its release page, so you can check your download before you open it."
+        "text": "Cap is open source, so you can read all of the code or build it yourself. Every release also lists a SHA-256 fingerprint on its release page, so you can check your download before you open it. Apple has also scanned it for known malware (notarization), which is not a review of what the app does."
       }
     },
     {
@@ -271,8 +271,8 @@ footer .legal{max-width:520px;line-height:1.5}
 </section>
 <section id="installing" aria-labelledby="h-installing">
 <h2 id="h-installing">Installing</h2>
-<div class="qa" id="macos-warning"><h3>Why does macOS warn me when I open Cap?</h3><p>Apple hasn't notarized Cap yet. Notarizing needs a paid developer membership, and Cap is a free hobby project. The first time you open it, macOS stops it, and the <a href="https://github.com/bkelson/cap/blob/main/INSTALL.md">install guide</a> walks you through the fix in about three minutes. You repeat the steps after each update until Cap is notarized, which is planned with no date.</p></div>
-<div class="qa" id="safe"><h3>Is it safe to open?</h3><p>Cap is open source, so you can <a href="https://github.com/bkelson/cap">read all of the code</a> or build it yourself. Every release also lists a SHA-256 fingerprint on its release page, so you can check your download before you open it.</p></div>
+<div class="qa" id="macos-warning"><h3>Will macOS warn me when I open Cap?</h3><p>Only with its usual question for any app downloaded from the internet: click Open. Since version 1.0.1, Cap is signed with an Apple Developer ID and notarized by Apple. To update, quit Cap, open the new download, drag Cap onto Applications and choose Replace. The <a href="https://github.com/bkelson/cap/blob/main/INSTALL.md">install guide</a> has the details.</p></div>
+<div class="qa" id="safe"><h3>Is it safe to open?</h3><p>Cap is open source, so you can <a href="https://github.com/bkelson/cap">read all of the code</a> or build it yourself. Every release also lists a SHA-256 fingerprint on its release page, so you can check your download before you open it. Apple has also scanned it for known malware (notarization), which is not a review of what the app does.</p></div>
 </section>
 <section id="using" aria-labelledby="h-using">
 <h2 id="h-using">Using Cap</h2>
@@ -318,9 +318,7 @@ footer .legal{max-width:520px;line-height:1.5}
     if (!t || !t.closest) return;
     var name = null;
     var dl = t.closest('[data-download]');
-    if (t.closest('#gate-go')) name = 'download-confirmed';
-    else if (t.closest('#gate-later')) name = 'download-later';
-    else if (dl) name = 'download-click-' + (dl.closest('nav') ? 'nav' : dl.closest('header') ? 'hero' : 'other') + (phone ? '-phone' : '');
+    if (dl) name = 'download-click-' + (dl.closest('nav') ? 'nav' : dl.closest('header') ? 'hero' : 'other') + (phone ? '-phone' : '');
     else if (t.closest('[data-concept]')) name = 'roadmap-concept-open';
     else if (t.closest('.donate, a[href*="liberapay.com"]')) name = 'donate-click';
     else {
