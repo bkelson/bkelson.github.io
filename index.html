@@ -14,7 +14,7 @@
 <meta name="description" content="Free Mac menu bar app that tracks your Claude usage across chat and Claude Code: session and weekly limits, reset countdown, alerts you set.">
 <link rel="canonical" href="https://cap.kelson.ai/">
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="Cap">
+<meta property="og:site_name" content="Cap Usage Tracker">
 <meta property="og:url" content="https://cap.kelson.ai/">
 <meta property="og:title" content="Cap, a usage tracker thingy for Claude">
 <meta property="og:description" content="Free Mac menu bar app that tracks your Claude usage across chat and Claude Code: session and weekly limits, reset countdown, alerts you set.">
@@ -29,11 +29,25 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Cap Usage Tracker",
+  "alternateName": [
+    "Cap",
+    "cap.kelson.ai"
+  ],
+  "url": "https://cap.kelson.ai/"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
   "@type": "SoftwareApplication",
   "name": "Cap",
   "alternateName": "Cap, a usage tracker thingy for Claude",
   "description": "Free Mac menu bar app that tracks your Claude usage across chat and Claude Code: session and weekly limits, reset countdown, alerts you set.",
   "applicationCategory": "UtilitiesApplication",
+  "softwareVersion": "1.0.1",
+  "dateModified": "2026-11-27",
   "operatingSystem": "macOS 13 or later (Apple silicon)",
   "url": "https://cap.kelson.ai/",
   "downloadUrl": "https://github.com/bkelson/cap/releases/latest",
@@ -403,7 +417,7 @@ picture{display:block}
       <div class="demo-row" id="demo-row">
         <div class="captions" id="captions">
           <h2 class="eyebrow" style="color:var(--accent)">How Cap tracks your Claude usage</h2>
-          <div id="steps" style="display:flex;flex-direction:column;gap:22px"><div class="step"><div class="step-bar"><div class="step-fill"></div></div><div><h3>Cap lives in your menu bar.</h3><p>A small dial and your Session percentage, always in view. Switch to Expanded to see All Models too.</p></div></div><div class="step"><div class="step-bar"><div class="step-fill"></div></div><div><h3>Click for the full picture.</h3><p>Session time remaining and when it resets, plus your weekly All Models limit and its reset day.</p></div></div><div class="step"><div class="step-bar"><div class="step-fill"></div></div><div><h3>It keeps up while you work.</h3><p>Every 15 seconds while you're at your Mac, Cap asks your own Claude Code for the usage windows. The dial turns orange at 70% and red at 90%.</p></div></div><div class="step"><div class="step-bar"><div class="step-fill"></div></div><div><h3>Pin it to your desktop.</h3><p>One click on the pin and the numbers stay on screen as a widget.</p></div></div></div>
+          <div id="steps" style="display:flex;flex-direction:column;gap:22px"><div class="step"><div class="step-bar"><div class="step-fill"></div></div><div><h3>Cap lives in your menu bar.</h3><p>A small dial and your Session percentage, always in view. Switch to Expanded to see All Models too.</p></div></div><div class="step"><div class="step-bar"><div class="step-fill"></div></div><div><h3>Click for the full picture.</h3><p>Your 5-hour session limit, how long is left and when it resets, plus your weekly limit and its reset day.</p></div></div><div class="step"><div class="step-bar"><div class="step-fill"></div></div><div><h3>It keeps up while you work.</h3><p>Every 15 seconds while you're at your Mac, Cap asks your own Claude Code for the usage windows. The dial turns orange at 70% and red at 90%.</p></div></div><div class="step"><div class="step-bar"><div class="step-fill"></div></div><div><h3>Pin it to your desktop.</h3><p>One click on the pin and the numbers stay on screen as a widget.</p></div></div></div>
         </div>
         <div class="stage-box" id="stage-box">
           <div class="stage-size" id="stage-size">
@@ -698,7 +712,7 @@ picture{display:block}
   /* ---------- pinned demo ---------- */
   var STEPS = [
     ['Cap lives in your menu bar.', 'A small dial and your Session percentage, always in view. Switch to Expanded to see All Models too.'],
-    ['Click for the full picture.', 'Session time remaining and when it resets, plus your weekly All Models limit and its reset day.'],
+    ['Click for the full picture.', 'Your 5-hour session limit, how long is left and when it resets, plus your weekly limit and its reset day.'],
     ['It keeps up while you work.', 'Every 15 seconds while you\'re at your Mac, Cap asks your own Claude Code for the usage windows. The dial turns orange at 70% and red at 90%.'],
     ['Pin it to your desktop.', 'One click on the pin and the numbers stay on screen as a widget.']
   ];
